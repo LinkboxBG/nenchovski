@@ -1,0 +1,275 @@
+{
+  "aggregate": {
+    "rating": 4.9,
+    "count": 35,
+    "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315",
+    "fetchedAt": "2026-07-11"
+  },
+  "reviews": [
+    {
+      "author": "Милена Димитрова",
+      "rating": 5,
+      "text": "Номер 1 хамали! Най-искрени благодарности за съдействието и помощта, които вашият екип ни оказва при нужда от пренасяне и транспорт. Ние предлагаме оборудване за заведение и ресторанти, и когато клиентите ни искат доставка с разтоварване и пренасяне на уредите в заведението, винаги избираме Хамалчо ЕООД. Повече от 15 години ползваме услугите на фирмата и винаги се доверяваме на тях. …",
+      "date": "2026-01",
+      "dateRelative": "преди 6 месеца",
+      "sourceUrl": "https://share.google/pI9psbiFftSi5yyQA"
+    },
+    {
+      "author": "Boris Drenkov",
+      "rating": 5,
+      "text": "Страхотни са! Коректни, точни, всичко е на абсолютно професионално ниво. Когато ми трябват хамалски услуги, ше ползвам тях!",
+      "date": "2026-06",
+      "dateRelative": "преди месец",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Petia Peeva",
+      "rating": 5,
+      "text": "Искам да благодаря на Хамали София - ''Хамалчо'' ЕООД за професионалното и безпроблемно извършване на нашето фирмено преместване.\nЕкипът беше изключително организиран, внимателен и бърз, като се погрижи всичко да мине гладко и без стрес. Вещите ни бяха третирани с грижа, а комуникацията с тях беше ясна и приятелска през целия процес. …",
+      "date": "2025-12",
+      "dateRelative": "преди 7 месеца",
+      "sourceUrl": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2xnMmNtbGtUemg2T0hrME9UQlBXRGcxTkMxNWVrRRAB!2m1!1s0x0:0x9ebcded2b4719933?hl=bg"
+    },
+    {
+      "author": "Roberta Georgieva",
+      "rating": 1,
+      "text": "Чакаме на студа повече от 30 минути, при положение че съм уточнила в колко часа ще имаме нужда от тях. Идва се със закъснение и дори “добър ден” не се казва. Имахме късмет, че съседите правят ремонт и имаха бригада, която да помогне да се вкара хладилника в апартамента….За тези пари, които получиха - 150 лв. + стария хладилник, се очакваше повече. Не препоръчвам.",
+      "date": "2025",
+      "dateRelative": "преди година",
+      "sourceUrl": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURQdXZiOF9nRRAB!2m1!1s0x0:0x9ebcded2b4719933?hl=bg"
+    },
+    {
+      "author": "Kristin Belcheva",
+      "rating": 5,
+      "text": "Момчетата дойдоха дори по-рано от уговорката ни, качиха един тон плочки до шести етаж. Изключително внимателни, усмихнати и любезни. Препоръчвам ги 🙂",
+      "date": "2025-12",
+      "dateRelative": "преди 7 месеца",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Antoaneta Angelova",
+      "rating": 5,
+      "text": "Половин час преди края на работното време г-н Ненчовски реагира и събра екип да пренесе уредите ни, след като друга фирма просто ни забрави. Препоръчвам на всички които се нуждаят от подобни услуги. Благодаря г-н Ненчовски и УСПЕХ, заслужавате го!",
+      "date": "2025",
+      "dateRelative": "преди година",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Таня Божинова",
+      "rating": 5,
+      "text": "Използваме услугите на \"Неновски\"ЕООД от няколко години и бих препоръчала на всичко близки, познати или корпоративни партньори. Изключително професионално отношение и изпълнение на поетите ангажименти. Случвало се е да звъннем за даден ангажимент в последния момент и винаги получаваме светкавична реакция и навременно пристигане на момчетата. Имат и собствен транспорт, което е много удобно. …",
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChZDSUhNMG9nS0VJQ0FnSUNkMTk3bE9REAE!2m1!1s0x0:0x9ebcded2b4719933?hl=bg"
+    },
+    {
+      "author": "Rossi Encheva",
+      "rating": 5,
+      "text": "Много точни! Благодарение на тях успях да организирам преместване в много кратък срок. Много съм доволна от професионално свършената работа, любезното отношение и от коректната цена. Препоръчвам фирмата с две ръце 🙌😊",
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Milena Shhopova",
+      "rating": 5,
+      "text": "Използвали сме услугите им няколко пъти, много коректна и точна фирма.",
+      "date": "2026-01",
+      "dateRelative": "преди 6 месеца",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Milena Zaharieva",
+      "rating": 5,
+      "text": "Дадоха ми цена по телефона, на база моето описание на вещи и адреси, за които е нужен пренос и превоз. Сравнено с други цени, които бях събрала, бяха най-изгодни. Дойдоха навреме, в събота, свършиха си работата съвестно, бяха любезни, бусът им беше чист. Лошото време (валя много) и калните пътища, през които се наложи да минат, по никакъв начин не повлия на работата или цената им. Препоръчвам ги!",
+      "date": "2021",
+      "dateRelative": "преди 5 години",
+      "sourceUrl": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUNxb2RlajBnRRAB!2m1!1s0x0:0x9ebcded2b4719933?hl=bg"
+    },
+    {
+      "author": "Milena BG",
+      "rating": 5,
+      "text": "Изключително съм доволна. 2 други хамалски фирми преди тях се опитаха да качат огромния ни диван по стълбите до 6 етаж в блок, но все се отказваха. Бяхме се примирили, че ще трябва да го вкарваме през прозореца, което щеше да е доста сложно. …",
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURVaWZxRTlBRRAB!2m1!1s0x0:0x9ebcded2b4719933?hl=bg"
+    },
+    {
+      "author": "Victoria Atanasova",
+      "rating": 5,
+      "text": "Наех момчетата да ми пренесат покупка от строителен хипермаркет до вкъщи и мебели от вкъщи до провинцията. Супер точни и реагират бързо.",
+      "date": "2025",
+      "dateRelative": "преди година",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Denitsa Vassileva",
+      "rating": 5,
+      "text": "Много коректни, точни и любезни. Работят организирано, бързо и професионално. Препоръчвам!",
+      "date": "2023",
+      "dateRelative": "преди 3 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Ива Любенова",
+      "rating": 5,
+      "text": "Бързи и коректни. Без подвеждащи оферти, точни и с професионално отношение. Препоръчвам ги!",
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Rumyana Petkova",
+      "rating": 5,
+      "text": "Изключително съм доволна, точни, коректни, бързи. Препоръчвам ги.",
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Monica Lazarova",
+      "rating": 5,
+      "text": "Останах много доволна. Коректно и професионално отношение. Препоръчвам с две ръце! 🤗🤗",
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Katerina Marianova Ilieva",
+      "rating": 5,
+      "text": "Винаги се доверяваме на Ненчовски. Препоръчваме!",
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "dental prima",
+      "rating": 5,
+      "text": "Отлични!",
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Georgi Georgiev",
+      "rating": 5,
+      "text": "Страхотни професионалисти. Горещо ги препоръчвам!",
+      "date": "2026-07",
+      "dateRelative": "преди 4 дни",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Mihaela Bozhkova",
+      "rating": 5,
+      "text": "Изключително доволна съм от услугата и преди всичко от отношението и лесната комуникация! Апартаментът беше пълен с лични вещи и мебели, трупани с години, а момчетата се справиха чудесно. Работиха организирано, бяха супер разбрани и коректни през цялото време. Справиха се бързо спрямо обема работа и най-важното - всичко беше изнесено както трябва и без излишна ангажираност от моя страна. …",
+      "date": "2026-06",
+      "dateRelative": "преди месец",
+      "sourceUrl": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25aMmFHVkpPRXhyTkZsdldITTNZWHBaUkdscVVXYxAB!2m1!1s0x0:0x9ebcded2b4719933?hl=bg"
+    },
+    {
+      "author": "Galia Bencheva",
+      "rating": 5,
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Vasil Vasilev",
+      "rating": 5,
+      "date": "2025-12",
+      "dateRelative": "преди 7 месеца",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Debora Borisova",
+      "rating": 5,
+      "date": "2025-09",
+      "dateRelative": "преди 10 месеца",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Silvia Bencheva",
+      "rating": 5,
+      "date": "2025",
+      "dateRelative": "Редактирано: преди година",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Alex Georgieva",
+      "rating": 5,
+      "date": "2025",
+      "dateRelative": "преди година",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Blue.Bird. 221",
+      "rating": 5,
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Мариела Лазарова",
+      "rating": 5,
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Александра Константинова",
+      "rating": 5,
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Mariana Veselinova",
+      "rating": 5,
+      "date": "2024",
+      "dateRelative": "преди 2 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "О. Матов",
+      "rating": 5,
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Tedkata1019@abv.bg Gergovska",
+      "rating": 5,
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Боряна Петрова",
+      "rating": 5,
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "VasetoKneja",
+      "rating": 5,
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "enaia",
+      "rating": 5,
+      "date": "2020",
+      "dateRelative": "преди 6 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    },
+    {
+      "author": "Vladi Dimitrov",
+      "rating": 5,
+      "date": "2019",
+      "dateRelative": "преди 7 години",
+      "sourceUrl": "https://www.google.com/maps?cid=11438262150166059315"
+    }
+  ]
+}

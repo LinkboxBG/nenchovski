@@ -1,65 +1,182 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { QuoteForm } from "@/components/QuoteForm";
+import { TrustStrip } from "@/components/TrustStrip";
+import { ReviewsSection } from "@/components/ReviewsSection";
+import { PriceTable } from "@/components/PriceTable";
+import {
+  ServiceCard,
+  StepsHowWeWork,
+  FAQAccordion,
+  AreasServed,
+  CtaBanner,
+} from "@/components/Sections";
+import { SITE } from "@/data/site";
+import { PRICE_FROM } from "@/data/pricing";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Хамали София — цени от 12,50 €/ч | Хамали Ненчовски",
+  description:
+    "Хамалски услуги в София от Хамали Ненчовски: преместване, кърти-чисти-извозва, почистване. 18 години опит, оферта до 1 час. ☎ 0894 766 424",
+  alternates: { canonical: `${SITE.domain}/` },
+  openGraph: {
+    title: "Хамали София — Хамали Ненчовски | 18 години опит",
+    description:
+      "Преместване на дома и офиса, кърти-чисти-извозва, почистване на мазета и тавани. Оферта до 1 час — 0894 766 424.",
+    url: `${SITE.domain}/`,
+    images: [{ url: `${SITE.domain}/og/home.jpg`, width: 1200, height: 630 }],
+    locale: "bg_BG",
+    type: "website",
+  },
+};
+
+const HOME_FAQ = [
+  {
+    q: "Колко струват хамалските услуги в София?",
+    a: "Един хамалин струва 12,50 € на час за София. Мини ван е 30 €/час, микробус (14 м³) — 40 €/час, а камион (20 м³) — 60 € на курс. Точната цена потвърждаваме при безплатен оглед или по телефона.",
+  },
+  {
+    q: "Колко бързо можете да дойдете?",
+    a: "Работим 7 дни в седмицата в цяла София. При свободен екип можем да реагираме още същия ден, а оферта получаваш до 1 час в работно време.",
+  },
+  {
+    q: "Работите ли извън София?",
+    a: "Да — извършваме премествания и транспорт в цялата страна, както и международни курсове от Гърция и Румъния до България. Извън София транспортът се таксува на километър в двете посоки.",
+  },
+  {
+    q: "Правите ли оглед преди оферта?",
+    a: "Да, огледът е безплатен. За по-малки премествания често е достатъчно да ни опишеш какво местим по телефона или да ни пратиш снимки през формата.",
+  },
+];
+
+const SERVICES = [
+  {
+    href: "/premestvane-na-doma/",
+    title: "Преместване на дома",
+    text: "Цялостно преместване на апартаменти и къщи — с опаковане, разглобяване и сглобяване на мебелите.",
+    priceFrom: PRICE_FROM.hamalin,
+    image:
+      "/wp-content/uploads/2023/12/Хамали-София-Ненчовски-Транспорт-корица.webp",
+    imageAlt: "Преместване на дома в София — екип на Хамали Ненчовски",
+  },
+  {
+    href: "/premestvane-na-ofisi/",
+    title: "Преместване на офиси",
+    text: "Бързо преместване на офиси и търговски обекти — извън работно време, без прекъсване на бизнеса.",
+    priceFrom: PRICE_FROM.hamalin,
+  },
+  {
+    href: "/karti-chisti-izvozva/",
+    title: "Кърти, чисти, извозва",
+    text: "Къртене на бани, стени и бетон, почистване след ремонт и извозване на строителни отпадъци.",
+    priceFrom: PRICE_FROM.hamalin,
+  },
+  {
+    href: "/premestvane-na-mebeli/",
+    title: "Преместване на мебели",
+    text: "Пренасяне на тежки и обемни мебели — дивани, гардероби, хладилници, пиана.",
+    priceFrom: PRICE_FROM.hamalin,
+  },
+  {
+    href: "/bus-pod-naem/",
+    title: "Бус под наем",
+    text: "Мини ван, микробус 14 м³ или камион 20 м³ с шофьор — за София и цялата страна.",
+    priceFrom: PRICE_FROM.minivan,
+  },
+  {
+    href: "/pochistvane-na-mazeta-sofia/",
+    title: "Почистване на мазета и тавани",
+    text: "Разчистване на мазета, тавани и дворове с извозване на всичко ненужно.",
+    priceFrom: PRICE_FROM.hamalin,
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <section className="bg-soft border-b border-black/5">
+        <div className="mx-auto max-w-[1140px] px-4 py-10 md:py-16 grid gap-10 lg:grid-cols-[1fr_400px] items-center">
+          <div>
+            <h1 className="text-4xl md:text-5xl leading-tight">
+              Хамали София — преместване без стрес
+            </h1>
+            <p className="mt-4 text-lg text-secondary max-w-xl leading-relaxed">
+              Хамали Ненчовски мести домове и офиси в София вече{" "}
+              <strong>18 години (от 2008 г.)</strong>. Кърти, чисти, извозва.
+              Реални цени, точни екипи и оферта до 1 час.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <a
+                href={`tel:+359${SITE.phone.slice(1)}`}
+                data-ga-event="tel_click"
+                className="rounded-lg bg-primary hover:bg-accent text-white font-sans font-bold text-lg px-6 py-3.5 transition-colors"
+              >
+                📞 {SITE.phoneDisplay}
+              </a>
+              <Link
+                href="/ceni/"
+                className="font-sans font-semibold text-primary underline underline-offset-4"
+              >
+                Виж всички цени →
+              </Link>
+            </div>
+          </div>
+          <QuoteForm />
+        </div>
+      </section>
+
+      <TrustStrip />
+
+      <main className="mx-auto max-w-[1140px] px-4">
+        <section aria-labelledby="services-h" className="my-12">
+          <h2 id="services-h" className="text-2xl md:text-3xl mb-6">
+            Хамалски услуги в София
+          </h2>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((s) => (
+              <ServiceCard key={s.href} {...s} />
+            ))}
+          </div>
+          <p className="mt-5 font-sans">
+            <Link
+              href="/hamalski-uslugi/"
+              className="font-semibold text-primary underline underline-offset-4"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              Всички услуги и цени →
+            </Link>
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        </section>
+
+        <StepsHowWeWork />
+
+        <section aria-labelledby="prices-h" className="my-12">
+          <h2 id="prices-h" className="text-2xl md:text-3xl mb-6">
+            Цени на хамалските услуги — 2026
+          </h2>
+          <PriceTable />
+        </section>
+
+        <ReviewsSection />
+        <FAQAccordion faq={HOME_FAQ} />
+        <AreasServed />
+
+        <section aria-labelledby="blog-h" className="my-12">
+          <h2 id="blog-h" className="text-2xl mb-4">
+            Полезно от блога
+          </h2>
+          <p className="text-secondary max-w-2xl">
+            Съвети за преместване, опаковане и подреждане на дома —{" "}
+            <Link
+              href="/blog/"
+              className="text-primary underline underline-offset-2"
+            >
+              разгледай блога ни
+            </Link>
+            .
+          </p>
+        </section>
       </main>
-    </div>
+      <CtaBanner />
+    </>
   );
 }
