@@ -9,7 +9,8 @@ const securityHeaders = [
       // Next.js inline runtime + GA4/GTM
       "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com",
+      "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://res.cloudinary.com",
+      "media-src 'self' https://res.cloudinary.com",
       "font-src 'self'",
       "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
       "frame-src https://www.google.com",

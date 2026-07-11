@@ -49,6 +49,13 @@ const HOME_FAQ = [
   },
 ];
 
+const HERO_VIDEO = encodeURI(
+  "https://res.cloudinary.com/py4moij3/video/upload/w_1920,q_auto/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.mp4"
+);
+const HERO_POSTER = encodeURI(
+  "https://res.cloudinary.com/py4moij3/video/upload/so_0,w_1920,q_auto,f_jpg/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.jpg"
+);
+
 const SERVICES = [
   {
     href: "/premestvane-na-doma/",
@@ -94,13 +101,28 @@ const SERVICES = [
 export default function HomePage() {
   return (
     <>
-      <section className="bg-soft border-b border-black/5">
-        <div className="mx-auto max-w-[1140px] px-4 py-10 md:py-16 grid gap-10 lg:grid-cols-[1fr_400px] items-center">
+      <section className="relative overflow-hidden bg-[#1c1b1b] border-b border-black/5">
+        {/* dangerouslySetInnerHTML: React не сериализира muted при SSR, а без него autoplay не тръгва */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          dangerouslySetInnerHTML={{
+            __html: `<video class="h-full w-full object-cover" autoplay muted loop playsinline preload="metadata" poster="${HERO_POSTER}"><source src="${HERO_VIDEO}" type="video/mp4" /></video>`,
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/45"
+        />
+        <div className="relative mx-auto max-w-[1140px] px-4 py-10 md:py-16 grid gap-10 lg:grid-cols-[1fr_400px] items-center">
           <div className="min-w-0">
-            <h1 className="text-4xl md:text-5xl leading-tight">
+            <h1
+              className="text-4xl md:text-5xl leading-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]"
+              style={{ color: "#fff" }}
+            >
               Хамали София — преместване без стрес
             </h1>
-            <p className="mt-4 text-lg text-secondary max-w-xl leading-relaxed">
+            <p className="mt-4 text-lg text-white/90 max-w-xl leading-relaxed">
               Хамали Ненчовски мести домове и офиси в София вече{" "}
               <strong>18 години (от 2008 г.)</strong>. Кърти, чисти, извозва.
               Реални цени, точни екипи и оферта до 1 час.
@@ -115,7 +137,7 @@ export default function HomePage() {
               </a>
               <Link
                 href="/ceni/"
-                className="font-sans font-semibold text-primary underline underline-offset-4"
+                className="font-sans font-semibold text-white underline underline-offset-4"
               >
                 Виж всички цени →
               </Link>
