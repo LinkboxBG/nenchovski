@@ -16,11 +16,12 @@ export const SITE = {
   phoneSecondaryDisplay: "0878 787 554",
   email: "ge.nenchovski@abv.bg",
   viber: "+359894766424",
+  // NAP синхронизиран с GMB профила („ул. Резбарска" 9А) — 11.07.2026
   address: {
-    street: "ул. Резбарска 9, ет. 2",
+    street: "ул. Резбарска 9А, ет. 2",
     quarter: "ж.к. Хаджи Димитър",
     city: "София",
-    postalCode: "1225",
+    postalCode: "1517",
     country: "BG",
     lat: 42.7164,
     lng: 23.3593,

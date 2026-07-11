@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GONE_410 } from "@/data/redirects.generated";
+import { GONE_410, REDIRECTS_301 } from "@/data/redirects.generated";
 
 /**
  * 1) 410 Gone за всички хак-спам URL-и (точен списък от FINAL-REDIRECT-MAP
@@ -9,6 +9,12 @@ import { GONE_410 } from "@/data/redirects.generated";
  */
 
 const GONE_SET = new Set(GONE_410.map((p) => p.replace(/\/$/, "")));
+
+// next.config redirects() не мачва кирилски sources → тези 301-ци се
+// обслужват тук с decoded сравнение (латинските остават в next.config).
+const REDIRECT_MAP = new Map(
+  REDIRECTS_301.map((r) => [r.source.replace(/\/$/, ""), r.destination])
+);
 
 // Директории, които съществуваха САМО заради хака (без запазените изключения)
 const GONE_PATTERNS = [
@@ -54,6 +60,13 @@ export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get("host") ?? "";
   const isStaging = host.endsWith(".vercel.app");
+
+  const decoded = decodeSafe(pathname).replace(/\/$/, "");
+  const redirectTarget = REDIRECT_MAP.get(decoded);
+  if (redirectTarget) {
+    const url = new URL(encodeURI(redirectTarget), request.nextUrl.origin);
+    return NextResponse.redirect(url, 301);
+  }
 
   if (isGone(pathname)) {
     return new NextResponse("Gone", {

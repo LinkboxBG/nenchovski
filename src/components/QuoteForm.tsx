@@ -33,7 +33,7 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
     setStatus("sending");
     setError("");
     try {
-      const res = await fetch("/api/contact", { method: "POST", body: fd });
+      const res = await fetch("/api/contact/", { method: "POST", body: fd });
       const json = await res.json();
       if (!res.ok || !json.ok) {
         throw new Error(json.error ?? "Грешка при изпращане.");

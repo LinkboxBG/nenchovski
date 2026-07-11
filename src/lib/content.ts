@@ -60,7 +60,11 @@ export function getServicePages(): ServicePage[] {
     .map((f) => {
       const raw = fs.readFileSync(path.join(PAGES_DIR, f), "utf8");
       const { data, content } = matter(raw);
-      const slug = (data.slug as string) ?? f.replace(/\.md$/, "");
+      // нормализация: "sale-day/links-booster" и "sale-day__links-booster" → "__"
+      const slug = ((data.slug as string) ?? f.replace(/\.md$/, "")).replace(
+        /\//g,
+        "__"
+      );
       const urlPath = "/" + slug.replace(/__/g, "/") + "/";
       return {
         slug,

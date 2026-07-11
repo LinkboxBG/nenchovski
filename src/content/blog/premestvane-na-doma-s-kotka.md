@@ -8,7 +8,7 @@ datePublished: "2019-12-01"
 estimatedDate: true
 dateModified: "2026-07-11"
 author: "Георги Ненчовски"
-cover: "/wp-content/uploads/2019/12/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B0-%D1%81-%D0%BA%D0%BE%D1%82%D0%BA%D0%B0-2-2.jpg"
+cover: "/wp-content/uploads/2019/12/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B0-%D1%81-%D0%BA%D0%BE%D1%82%D0%BA%D0%B0-5.jpg"
 coverAlt: "Преместване на дома с котка — съвети от Хамали Ненчовски"
 gscClicks: 358
 ---

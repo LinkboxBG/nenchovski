@@ -22,7 +22,7 @@ function collect(dir) {
     if (!f.endsWith(".md")) continue;
     const { data } = matter(readFileSync(path.join(full, f), "utf8"));
     const cover = data.cover;
-    const key = data.slug ?? f.replace(/\.md$/, "");
+    const key = (data.slug ?? f.replace(/\.md$/, "")).replace(/\//g, "__");
     if (!cover || !cover.startsWith("/")) continue;
     const src = path.join(root, "public", decodeURIComponent(cover));
     if (existsSync(src)) jobs.set(key, src);

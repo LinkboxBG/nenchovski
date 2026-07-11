@@ -11,7 +11,7 @@ import {
   type BlogArticle,
 } from "@/lib/content";
 import { JsonLd } from "@/components/JsonLd";
-import { serviceSchema, articleSchema } from "@/lib/schema";
+import { serviceSchema, articleSchema, productSchema } from "@/lib/schema";
 import { QuoteForm } from "@/components/QuoteForm";
 import { PriceTable } from "@/components/PriceTable";
 import { ReviewsSection } from "@/components/ReviewsSection";
@@ -120,7 +120,16 @@ function ServiceView({ page }: { page: ServicePage }) {
 
   return (
     <>
-      {isService ? (
+      {page.slug === "kashoni" ? (
+        <JsonLd
+          data={productSchema({
+            name: "Кашони за преместване",
+            url: page.urlPath,
+            description: page.description,
+            image: page.cover,
+          })}
+        />
+      ) : isService ? (
         <JsonLd
           data={serviceSchema({
             name: page.serviceType ?? page.h1,
