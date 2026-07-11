@@ -96,7 +96,7 @@ export default function HomePage() {
     <>
       <section className="bg-soft border-b border-black/5">
         <div className="mx-auto max-w-[1140px] px-4 py-10 md:py-16 grid gap-10 lg:grid-cols-[1fr_400px] items-center">
-          <div>
+          <div className="min-w-0">
             <h1 className="text-4xl md:text-5xl leading-tight">
               Хамали София — преместване без стрес
             </h1>

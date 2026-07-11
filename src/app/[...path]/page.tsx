@@ -150,7 +150,7 @@ function ServiceView({ page }: { page: ServicePage }) {
           ]}
         />
         <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
-          <div>
+          <div className="min-w-0">
             <h1 className="text-3xl md:text-4xl">{page.h1}</h1>
             <DirectAnswer text={page.directAnswer} />
             <article
@@ -224,7 +224,7 @@ function ArticleView({ article }: { article: BlogArticle }) {
           ]}
         />
         <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
-          <article>
+          <article className="min-w-0">
             <header>
               <h1 className="text-3xl md:text-4xl">{article.h1}</h1>
               <p className="mt-3 font-sans text-sm text-secondary">

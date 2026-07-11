@@ -62,7 +62,7 @@ export default function CeniPage() {
       <main className="mx-auto max-w-[1140px] px-4">
         <Breadcrumbs items={[{ name: "Цени", url: "/ceni/" }]} />
         <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
-          <div>
+          <div className="min-w-0">
             <h1 className="text-3xl md:text-4xl">
               Цени на хамалски услуги в София — 2026
             </h1>
