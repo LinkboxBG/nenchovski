@@ -53,7 +53,7 @@ function CorporateBand({ className }: { className: string }) {
 
         <ul
           data-reveal-stagger
-          className="mx-auto grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4"
+          className="mx-auto grid max-w-4xl grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-5"
         >
           {sorted.map((client) => (
             <li key={client.name} data-reveal>
@@ -69,25 +69,31 @@ function CorporateBand({ className }: { className: string }) {
 /** Едно клиентско лого/име върху чиста бяла плочка — чете се на всеки фон. */
 function ClientTile({ client }: { client: CorporateClient }) {
   return (
-    <div className="group flex h-full flex-col items-center gap-2.5">
-      <div className="flex h-[74px] w-full items-center justify-center rounded-xl border border-white/10 bg-white px-5 shadow-[0_4px_14px_-6px_rgba(0,0,0,0.6)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-premium">
+    <div className="group flex h-full flex-col items-center gap-3">
+      <div className="flex h-[96px] w-full items-center justify-center rounded-xl border border-white/10 bg-white px-5 py-4 shadow-[0_4px_14px_-6px_rgba(0,0,0,0.6)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-premium">
         {client.logo ? (
           <Image
             src={client.logo}
             alt={client.name}
-            width={160}
-            height={48}
-            className="max-h-10 w-auto max-w-full object-contain"
+            width={200}
+            height={128}
+            className="max-h-[64px] w-auto max-w-full object-contain"
           />
         ) : (
-          <span className="text-center font-sans text-[15px] font-bold leading-tight tracking-tight text-carbon">
+          <span className="text-center font-sans text-base font-bold leading-tight tracking-tight text-carbon">
             {client.shortName ?? client.name}
           </span>
         )}
       </div>
-      <span className="font-sans text-[11px] font-semibold uppercase tracking-wide text-white/45 transition-colors group-hover:text-primary">
-        {client.since ?? " "}
+      {client.since ? (
+      <span className="rounded-full bg-white/[0.07] px-2.5 py-1 font-sans text-[11px] font-semibold uppercase tracking-wide text-white/80 transition-colors group-hover:bg-primary/15 group-hover:text-white">
+        {client.since}
       </span>
+      ) : (
+        <span className="font-sans text-[11px] font-semibold uppercase tracking-wide text-white/55 transition-colors group-hover:text-primary">
+          Клиент на Ненчовски
+        </span>
+      )}
     </div>
   );
 }

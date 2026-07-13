@@ -67,14 +67,15 @@ export const CORPORATE_CLIENTS: CorporateClient[] = [
     sector: "institution",
     url: "https://www.ipa.government.bg",
   },
-  // Без лого → AuthorityStrip рендерира текстов badge
   {
-    name: "Гопет Логистикс",
+    name: "Гопет Транс",
+    shortName: "Гопет",
+    logo: "/brand/clients/gopet.webp",
     sector: "business",
   },
   {
-    name: "Диджитол Смарт Инфраструктура",
-    shortName: "Диджитол",
+    name: "Диджипол",
+    logo: "/brand/clients/digipol.webp",
     sector: "business",
   },
 ];
