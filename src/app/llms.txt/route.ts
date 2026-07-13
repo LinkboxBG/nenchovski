@@ -1,7 +1,23 @@
 import { SITE } from "@/data/site";
-import { PRICES, formatPrice } from "@/data/pricing";
+import {
+  PRICES,
+  formatPrice,
+  formatMoney,
+  MOVING_PACKAGES,
+  SERVICE_PACKAGES,
+  DEMOLITION_GROUPS,
+  DEMOLITION_SLUGS,
+  type ServicePackage,
+} from "@/data/pricing";
 
 export const dynamic = "force-static";
+
+function pkgLines(pkg: ServicePackage): string {
+  const tiers = pkg.tiers
+    .map((t) => `${t.label} — ${formatMoney(t.price)}${t.note ? ` (${t.note})` : ""}`)
+    .join("; ");
+  return `- ${pkg.heading}: ${tiers}`;
+}
 
 /** /llms.txt — GEO: структуриран обзор за AI асистенти и търсачки. */
 export function GET() {
@@ -10,13 +26,31 @@ export function GET() {
       `- ${p.name}${p.capacity ? ` (${p.capacity})` : ""}: София ${formatPrice(p.sofia.price)} ${p.sofia.unit}${p.sofia.extra ? ` ${p.sofia.extra}` : ""}; страната ${formatPrice(p.country.price)} ${p.country.unit}${p.country.extra ? ` ${p.country.extra}` : ""}`
   ).join("\n");
 
+  const packagePrices = [
+    MOVING_PACKAGES,
+    ...Object.entries(SERVICE_PACKAGES)
+      .filter(([slug]) => !DEMOLITION_SLUGS.has(slug))
+      .map(([, pkg]) => pkg),
+  ]
+    .map(pkgLines)
+    .join("\n");
+  const demolitionPrices = DEMOLITION_GROUPS.map(pkgLines).join("\n");
+
   const body = `# Хамали Ненчовски (nenchovski.com)
 
 > Хамалски и транспортни услуги в София и цялата страна от 2008 г. (18 години опит). Преместване на домове и офиси, кърти-чисти-извозва, почистване на мазета и тавани, бус под наем, кашони и опаковъчни материали. Работим понеделник–събота, 08:00–18:00 ч. (неделя — почивен ден). Телефон: ${SITE.phoneDisplay}. Оферта до 1 час в работно време.
 
 Фирма: ${SITE.legalName}, ЕИК ${SITE.eik}, ${SITE.address.city}, ${SITE.address.quarter}, ${SITE.address.street}.
 
-## Цени 2026 (официални, EUR)
+## Пакетни цени 2026 (водещи, EUR)
+
+${packagePrices}
+
+## Кърти, чисти, извозва (EUR)
+
+${demolitionPrices}
+
+## Часова тарифа (хамалин и транспорт, EUR)
 
 ${prices}
 

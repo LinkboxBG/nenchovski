@@ -11,7 +11,25 @@ import {
 import { JsonLd } from "@/components/JsonLd";
 import { serviceSchema, articleSchema, productSchema } from "@/lib/schema";
 import { QuoteForm } from "@/components/QuoteForm";
-import { PriceTable } from "@/components/PriceTable";
+import { PriceTable, RateCardDetails } from "@/components/PriceTable";
+import { PackagePricing, PackageCatalog } from "@/components/PackagePricing";
+import {
+  getLeadPackage,
+  packageFrom,
+  formatPrice,
+  DEMOLITION_SLUGS,
+  DEMOLITION_HUB_SLUG,
+  DEMOLITION_GROUPS,
+} from "@/data/pricing";
+
+/** Ценови етикет за related-карти: пакетна „от“ котва, иначе часова тарифа. */
+function priceLabelFor(p: ServicePage): string | undefined {
+  const pkg = getLeadPackage(p.slug);
+  if (pkg?.heroFrom != null) return `от ${formatPrice(pkg.heroFrom)} €`;
+  if (pkg) return undefined; // пакет без обща „от“ котва (единични €/кв.м) → без етикет
+  if (typeof p.priceFrom === "number") return `от ${formatPrice(p.priceFrom)} €/ч`;
+  return undefined;
+}
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { Hero } from "@/components/Hero";
 import { AuthorityStrip } from "@/components/AuthorityStrip";
@@ -159,6 +177,17 @@ function ServiceView({ page }: { page: ServicePage }) {
     enrichment.priceHighlight ??
     (page.category === "transport" ? "mikrobus" : "hamalin");
 
+  // Пакетни цени (водещият слой). Хъбът „кърти-чисти“ рендерира целия каталог;
+  // за къртаческите страници часовата рейткарта се крие (услугата е различна).
+  const isHub = page.slug === DEMOLITION_HUB_SLUG;
+  const pkg = getLeadPackage(page.slug);
+  const isDemolition = DEMOLITION_SLUGS.has(page.slug);
+  // Hero „от“ котва: при наличие на пакет използваме pkg.heroFrom (undefined →
+  // без числов тийзър при единично-остойностени услуги). Без пакет → frontmatter.
+  const heroFrom = pkg ? pkg.heroFrom : isHub ? undefined : page.priceFrom;
+  // Offer schema цена: най-ниската конкретна от пакета, иначе frontmatter.
+  const schemaPriceFrom = (pkg ? packageFrom(pkg) : undefined) ?? page.priceFrom;
+
   const relatedArticles = (enrichment.relatedArticles ?? [])
     .map((slug) => getBlogArticles().find((a) => a.slug === slug))
     .filter(Boolean)
@@ -186,7 +215,8 @@ function ServiceView({ page }: { page: ServicePage }) {
             name: page.serviceType ?? page.h1,
             url: page.urlPath,
             description: page.description,
-            priceFrom: page.priceFrom,
+            priceFrom: schemaPriceFrom,
+            pkg,
           })}
         />
       ) : null}
@@ -207,7 +237,7 @@ function ServiceView({ page }: { page: ServicePage }) {
               }
             : undefined
         }
-        priceFrom={isService ? page.priceFrom : undefined}
+        priceFrom={isService ? heroFrom : undefined}
         b2b={enrichment.heroVariant === "b2b"}
         breadcrumbsSlot={
           <Breadcrumbs
@@ -240,7 +270,22 @@ function ServiceView({ page }: { page: ServicePage }) {
           {after !== undefined ? (
             <>
               <div className="mx-auto my-8 max-w-[72ch]">
-                <PriceTable highlightId={priceHighlight} />
+                {isHub ? (
+                  // Хъб „кърти, чисти, извозва“ → пълен групиран каталог (файл D).
+                  <PackageCatalog groups={DEMOLITION_GROUPS} />
+                ) : pkg ? (
+                  <>
+                    <PackagePricing pkg={pkg} />
+                    {/* Часовата рейткарта е нерелевантна за къртене → само за
+                        останалите услуги, като вторичен детайл. */}
+                    {!isDemolition ? (
+                      <RateCardDetails highlightId={priceHighlight} />
+                    ) : null}
+                  </>
+                ) : (
+                  // Услуги без пакет (мебели, маршрути, utility) → рейткартата води.
+                  <PriceTable highlightId={priceHighlight} />
+                )}
               </div>
               <article
                 className="prose-nen mx-auto"
@@ -285,7 +330,7 @@ function ServiceView({ page }: { page: ServicePage }) {
               services={related.map((rp) => ({
                 href: rp.urlPath,
                 label: rp.h1,
-                priceFrom: rp.priceFrom,
+                priceLabel: priceLabelFor(rp),
               }))}
             />
           </div>
@@ -336,7 +381,7 @@ function ArticleView({ article }: { article: BlogArticle }) {
     .map((p) => ({
       href: p!.urlPath,
       label: p!.h1,
-      priceFrom: p!.priceFrom,
+      priceLabel: priceLabelFor(p!),
     }));
 
   const moreArticles = getBlogArticles()
