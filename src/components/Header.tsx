@@ -58,22 +58,6 @@ export function Header() {
                 gaEvent="viber_click"
               />
             </div>
-
-            <a
-              href={`mailto:${SITE.email}`}
-              className="ml-2 inline-flex items-center gap-2 rounded-full border border-line bg-white/5 py-1 pl-1 pr-3 transition-colors hover:bg-white/10"
-              aria-label={`ABV поща: ${SITE.email}`}
-            >
-              <Image
-                src="/brand/social/abv.svg"
-                alt=""
-                width={22}
-                height={22}
-                aria-hidden
-                className="rounded-[5px]"
-              />
-              <span className="font-medium text-white/85">ABV поща</span>
-            </a>
           </div>
         </div>
       </div>
