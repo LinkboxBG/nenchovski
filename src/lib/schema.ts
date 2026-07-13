@@ -100,7 +100,6 @@ export function movingCompanySchema() {
       SITE.social.instagram,
       SITE.social.tiktok,
     ],
-    inLanguage: "bg",
     // AggregateRating само при ≥5 реални ревюта (правилото „no fake data")
     ...(reviews.aggregate &&
     reviews.reviews.length >= 5 &&
@@ -157,7 +156,6 @@ export function serviceSchema(opts: {
     serviceType: opts.name,
     provider: { "@id": ORG_ID },
     areaServed: { "@type": "City", name: "София" },
-    inLanguage: "bg",
     ...offers,
   };
 }
@@ -197,15 +195,9 @@ export function articleSchema(opts: {
       url: `${SITE.domain}/za-nas/`,
       sameAs: ["https://www.facebook.com/silvia.bencheva"],
     },
-    // editor И reviewedBy — и двете са валидни CreativeWork свойства;
-    // reviewedBy е сигналът, който Google/AI двигателите четат за ревизия.
+    // editor е валидно CreativeWork свойство и носи редакторския/експертния
+    // (E-E-A-T) сигнал. reviewedBy НЕ съществува в Schema.org речника — не се ползва.
     editor: {
-      "@type": "Person",
-      name: EDITOR.name,
-      worksFor: { "@type": "Organization", name: "Linkbox.BG" },
-      sameAs: [EDITOR.profileUrl],
-    },
-    reviewedBy: {
       "@type": "Person",
       name: EDITOR.name,
       worksFor: { "@type": "Organization", name: "Linkbox.BG" },
