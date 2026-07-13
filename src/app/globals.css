@@ -104,22 +104,29 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: var(--font-slab);
-  color: var(--color-ink);
-  background: var(--color-paper);
-}
+/*
+ * Базовите element-стилове ТРЯБВА да са в @layer base — иначе (нелейърнати)
+ * бият Tailwind утилитите и `text-white` върху херо заглавия не хваща
+ * (заглавията излизат тъмни/сиви на тъмен фон). @layer base губи от utilities.
+ */
+@layer base {
+  body {
+    font-family: var(--font-slab);
+    color: var(--color-ink);
+    background: var(--color-paper);
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  color: var(--color-ink);
-  text-wrap: balance;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
 }
 
 /* Дълги статии (verbatim съдържание) */
