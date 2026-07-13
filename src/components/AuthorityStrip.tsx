@@ -9,15 +9,23 @@ import reviews from "@/data/reviews.json";
 import { CountUp } from "@/components/CountUp";
 import { StarRating } from "@/components/StarRating";
 
+interface StatItem {
+  value: number;
+  suffix: string;
+  label: string;
+}
+
 interface AuthorityStripProps {
   variant: "corporate" | "reviews" | "stats";
   className?: string;
+  /** Само за variant="stats" — заменя глобалните COMPANY_STATS за конкретна страница. */
+  items?: readonly StatItem[];
 }
 
-export function AuthorityStrip({ variant, className = "" }: AuthorityStripProps) {
+export function AuthorityStrip({ variant, className = "", items }: AuthorityStripProps) {
   if (variant === "corporate") return <CorporateBand className={className} />;
   if (variant === "reviews") return <ReviewsBand className={className} />;
-  return <StatsBand className={className} />;
+  return <StatsBand className={className} items={items} />;
 }
 
 /* ------------------------------------------------------------------ */
@@ -168,15 +176,22 @@ function truncate(text: string, max: number): string {
 /* Stats                                                               */
 /* ------------------------------------------------------------------ */
 
-function StatsBand({ className }: { className: string }) {
+function StatsBand({
+  className,
+  items = COMPANY_STATS,
+}: {
+  className: string;
+  items?: readonly StatItem[];
+}) {
+  // Решетка според броя: 4 числа → 2×2 на мобилен, 4 в ред на desktop.
+  const cols =
+    items.length === 4 ? "grid-cols-2 md:grid-cols-4" : "grid-cols-3 md:grid-cols-3";
+
   return (
     <div className={`bg-carbon py-12 md:py-14 ${className}`}>
       <div className="mx-auto max-w-[1140px] px-4">
-        <div
-          data-reveal-stagger
-          className="grid grid-cols-3 gap-y-8 md:grid-cols-3 md:gap-y-0"
-        >
-          {COMPANY_STATS.map((stat, i) => (
+        <div data-reveal-stagger className={`grid ${cols} gap-y-8 md:gap-y-0`}>
+          {items.map((stat, i) => (
             <div
               key={stat.label}
               data-reveal
@@ -187,6 +202,7 @@ function StatsBand({ className }: { className: string }) {
               <CountUp
                 value={stat.value}
                 suffix={stat.suffix}
+                group
                 className="font-sans text-4xl font-bold text-white"
               />
               <span className="text-sm text-white/60">{stat.label}</span>
