@@ -65,6 +65,11 @@ export function Footer() {
               label="Instagram"
             />
             <SocialLink
+              href={SITE.social.tiktok}
+              src="/brand/social/tiktok.svg"
+              label="TikTok"
+            />
+            <SocialLink
               href={SITE.social.google}
               src="/brand/social/google-g.svg"
               label="Отзиви в Google"
