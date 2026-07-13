@@ -15,6 +15,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE.domain}/kontakti/`, priority: 0.6, changeFrequency: "yearly" },
     { url: `${SITE.domain}/porachai/`, priority: 0.7, changeFrequency: "yearly" },
     { url: `${SITE.domain}/blog/`, priority: 0.6, changeFrequency: "weekly" },
+    {
+      url: `${SITE.domain}/politika-za-poveritelnost/`,
+      priority: 0.2,
+      changeFrequency: "yearly",
+    },
   ];
 
   for (const p of getServicePages()) {

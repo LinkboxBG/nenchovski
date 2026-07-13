@@ -6,6 +6,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { Analytics } from "@/components/Analytics";
+import { CookieConsent } from "@/components/CookieConsent";
+import { ScrollFx } from "@/components/ScrollFx";
 import { JsonLd } from "@/components/JsonLd";
 import { movingCompanySchema } from "@/lib/schema";
 import { SITE } from "@/data/site";
@@ -50,12 +52,41 @@ export default function RootLayout({
       className={`${roboto.variable} ${robotoSlab.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Крие [data-reveal] само при работещ JS — crawlers/no-JS виждат всичко */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js')`,
+          }}
+        />
         <JsonLd data={movingCompanySchema()} />
         <Header />
         <div className="flex-1 pb-16 md:pb-0">{children}</div>
         <Footer />
         <StickyMobileBar />
+        <CookieConsent />
+        <ScrollFx />
         <Analytics />
+        {/* Google Consent Mode v2: default = denied, преди зареждане на GA.
+            Ако вече има запазен избор (nen-consent=granted) — веднага update. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  wait_for_update: 500
+});
+try {
+  var nenConsent = localStorage.getItem('nen-consent');
+  if (nenConsent === 'granted') {
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+  }
+} catch (e) {}`,
+          }}
+        />
         {GA_ID ? (
           <>
             <Script

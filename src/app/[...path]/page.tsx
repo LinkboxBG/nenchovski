@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 import {
   getServicePages,
   getServicePage,
@@ -15,10 +13,18 @@ import { serviceSchema, articleSchema, productSchema } from "@/lib/schema";
 import { QuoteForm } from "@/components/QuoteForm";
 import { PriceTable } from "@/components/PriceTable";
 import { ReviewsSection } from "@/components/ReviewsSection";
-import { TrustStrip } from "@/components/TrustStrip";
+import { Hero } from "@/components/Hero";
+import { AuthorityStrip } from "@/components/AuthorityStrip";
+import { Gallery } from "@/components/Gallery";
+import { AuthorBox } from "@/components/AuthorBox";
+import { RelatedArticles } from "@/components/RelatedArticles";
+import { RelatedServices } from "@/components/RelatedServices";
+import {
+  getPageEnrichment,
+  getArticleEnrichment,
+} from "@/data/enrichment";
 import {
   Breadcrumbs,
-  DirectAnswer,
   FAQAccordion,
   StepsHowWeWork,
   CtaBanner,
@@ -27,6 +33,10 @@ import { SITE } from "@/data/site";
 import { ogImage } from "@/lib/og";
 
 export const dynamicParams = false;
+
+/** Fallback херо снимка, когато няма enrichment.hero.image и няма frontmatter cover. */
+const HERO_FALLBACK =
+  "/wp-content/uploads/2023/12/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F-%D0%9D%D0%B5%D0%BD%D1%87%D0%BE%D0%B2%D1%81%D0%BA%D0%B8-%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D0%BA%D0%BE%D1%80%D0%B8%D1%86%D0%B0.webp";
 
 function decodeSeg(s: string): string {
   try {
@@ -118,6 +128,25 @@ function ServiceView({ page }: { page: ServicePage }) {
     .map((slug) => getServicePage(slug))
     .filter(Boolean) as ServicePage[];
 
+  const enrichment = getPageEnrichment(page.slug, page.category);
+  const heroImage = enrichment.hero?.image
+    ? { src: enrichment.hero.image, alt: enrichment.hero.alt ?? page.h1 }
+    : page.cover
+      ? { src: page.cover, alt: page.coverAlt ?? page.h1 }
+      : { src: HERO_FALLBACK, alt: page.h1 };
+
+  const gallery = enrichment.gallery ?? [];
+
+  const relatedArticles = (enrichment.relatedArticles ?? [])
+    .map((slug) => getBlogArticles().find((a) => a.slug === slug))
+    .filter(Boolean)
+    .map((a) => ({
+      urlPath: a!.urlPath,
+      title: a!.h1,
+      cover: a!.cover,
+      coverAlt: a!.coverAlt,
+    }));
+
   return (
     <>
       {page.slug === "kashoni" ? (
@@ -139,63 +168,113 @@ function ServiceView({ page }: { page: ServicePage }) {
           })}
         />
       ) : null}
-      <TrustStrip />
-      <main className="mx-auto max-w-[1140px] px-4">
-        <Breadcrumbs
-          items={[
-            { name: "Хамалски услуги", url: "/hamalski-uslugi/" },
-            ...(page.slug !== "hamalski-uslugi"
-              ? [{ name: page.h1, url: page.urlPath }]
-              : []),
-          ]}
-        />
-        <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
-          <div className="min-w-0">
-            <h1 className="text-3xl md:text-4xl">{page.h1}</h1>
-            <DirectAnswer text={page.directAnswer} />
-            <article
-              className="prose-nen"
-              dangerouslySetInnerHTML={{ __html: before }}
-            />
-            {after !== undefined ? (
-              <>
-                <div className="my-6">
-                  <PriceTable />
-                </div>
-                <article
-                  className="prose-nen"
-                  dangerouslySetInnerHTML={{ __html: after }}
-                />
-              </>
-            ) : null}
-            {isService ? <StepsHowWeWork /> : null}
-            <ReviewsSection />
-            <FAQAccordion faq={page.faq} />
-            {related.length ? (
-              <section aria-labelledby="rel-h" className="my-12">
-                <h2 id="rel-h" className="text-2xl mb-4">
-                  Свързани услуги
-                </h2>
-                <ul className="flex flex-wrap gap-2">
-                  {related.map((rp) => (
-                    <li key={rp.slug}>
-                      <Link
-                        href={rp.urlPath}
-                        className="inline-block rounded-full border border-black/15 bg-white px-4 py-2 font-sans text-sm font-medium hover:border-primary hover:text-primary transition-colors"
-                      >
-                        {rp.h1}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ) : null}
-          </div>
-          <aside className="lg:sticky lg:top-24 self-start">
-            <QuoteForm />
-          </aside>
+
+      <Hero
+        title={page.h1}
+        subtitle={page.directAnswer}
+        image={heroImage}
+        badges={enrichment.hero?.badges}
+        breadcrumbsSlot={
+          <Breadcrumbs
+            dark
+            items={[
+              { name: "Хамалски услуги", url: "/hamalski-uslugi/" },
+              ...(page.slug !== "hamalski-uslugi"
+                ? [{ name: page.h1, url: page.urlPath }]
+                : []),
+            ]}
+          />
+        }
+      />
+
+      {enrichment.authority ? (
+        <AuthorityStrip variant={enrichment.authority} />
+      ) : null}
+
+      {/* Съдържание (светла лента) */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1140px] px-4 py-12 md:py-16">
+          <article
+            className="prose-nen mx-auto"
+            dangerouslySetInnerHTML={{ __html: before }}
+          />
+          {after !== undefined ? (
+            <>
+              <div className="mx-auto my-8 max-w-[72ch]">
+                <PriceTable />
+              </div>
+              <article
+                className="prose-nen mx-auto"
+                dangerouslySetInnerHTML={{ __html: after }}
+              />
+            </>
+          ) : null}
         </div>
-      </main>
+      </section>
+
+      {gallery.length ? (
+        <section className="bg-soft">
+          <div className="mx-auto max-w-[1140px] px-4 py-2">
+            <Gallery images={gallery} />
+          </div>
+        </section>
+      ) : null}
+
+      {isService ? <StepsHowWeWork /> : null}
+
+      {/* Ревюта + ЧЗВ (светла лента) */}
+      <section className="bg-soft">
+        <div className="mx-auto max-w-[1140px] px-4 py-2">
+          <ReviewsSection />
+          <FAQAccordion faq={page.faq} />
+        </div>
+      </section>
+
+      {related.length ? (
+        <section className="bg-paper">
+          <div className="mx-auto max-w-[1140px] px-4 py-2">
+            <RelatedServices
+              title="Свързани услуги"
+              services={related.map((rp) => ({
+                href: rp.urlPath,
+                label: rp.h1,
+                priceFrom: rp.priceFrom,
+              }))}
+            />
+          </div>
+        </section>
+      ) : null}
+
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1140px] px-4 py-2">
+          <AuthorBox variant="service" />
+        </div>
+      </section>
+
+      {/* Оферта (тъмна лента) */}
+      <section className="bg-carbon-gradient py-16 md:py-20">
+        <div className="mx-auto max-w-[1140px] px-4 text-center">
+          <h2 data-reveal className="text-2xl font-bold text-white md:text-3xl">
+            Вземи оферта до 1 час
+          </h2>
+          <p data-reveal className="mx-auto mt-3 max-w-xl text-white/70">
+            Опиши какво местим, къртим или извозваме — връщаме се с цена до 1 час
+            в работно време.
+          </p>
+          <div className="mx-auto mt-8 max-w-xl text-left">
+            <QuoteForm variant={enrichment.formVariant} dark />
+          </div>
+        </div>
+      </section>
+
+      {relatedArticles.length ? (
+        <section className="bg-soft">
+          <div className="mx-auto max-w-[1140px] px-4 py-2">
+            <RelatedArticles articles={relatedArticles} />
+          </div>
+        </section>
+      ) : null}
+
       <CtaBanner />
     </>
   );
@@ -204,6 +283,25 @@ function ServiceView({ page }: { page: ServicePage }) {
 /* ================= Blog article ================= */
 
 function ArticleView({ article }: { article: BlogArticle }) {
+  const relatedServices = (getArticleEnrichment(article.slug).relatedServices ?? [])
+    .map((slug) => getServicePage(slug))
+    .filter(Boolean)
+    .map((p) => ({
+      href: p!.urlPath,
+      label: p!.h1,
+      priceFrom: p!.priceFrom,
+    }));
+
+  const moreArticles = getBlogArticles()
+    .filter((a) => a.slug !== article.slug)
+    .slice(0, 3)
+    .map((a) => ({
+      urlPath: a.urlPath,
+      title: a.h1,
+      cover: a.cover,
+      coverAlt: a.coverAlt,
+    }));
+
   return (
     <>
       <JsonLd
@@ -216,72 +314,80 @@ function ArticleView({ article }: { article: BlogArticle }) {
           image: article.cover,
         })}
       />
-      <main className="mx-auto max-w-[1140px] px-4">
-        <Breadcrumbs
-          items={[
-            { name: "Блог", url: "/blog/" },
-            { name: article.h1, url: article.urlPath },
-          ]}
-        />
-        <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
-          <article className="min-w-0">
-            <header>
-              <h1 className="text-3xl md:text-4xl">{article.h1}</h1>
-              <p className="mt-3 font-sans text-sm text-secondary">
-                {article.author} ·{" "}
-                <time dateTime={article.datePublished}>
-                  {formatDateBg(article.datePublished)}
-                </time>
-              </p>
-            </header>
-            {article.cover ? (
-              <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl bg-soft">
-                <Image
-                  src={article.cover}
-                  alt={article.coverAlt ?? article.h1}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 66vw"
-                  priority
-                  className="object-cover"
-                />
-              </div>
-            ) : null}
-            <div
-              className="prose-nen mt-8"
-              dangerouslySetInnerHTML={{ __html: article.html }}
-            />
-          </article>
-          <aside className="lg:sticky lg:top-24 self-start">
-            <QuoteForm compact />
-            <MoreArticles current={article} />
-          </aside>
+
+      <Hero
+        variant="article"
+        title={article.h1}
+        image={{
+          src: article.cover ?? HERO_FALLBACK,
+          alt: article.coverAlt ?? article.h1,
+        }}
+        breadcrumbsSlot={
+          <Breadcrumbs
+            dark
+            items={[
+              { name: "Блог", url: "/blog/" },
+              { name: article.h1, url: article.urlPath },
+            ]}
+          />
+        }
+      />
+
+      {/* Съдържание (светла лента) */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1140px] px-4 py-12 md:py-16">
+          <p className="mx-auto max-w-[72ch] font-sans text-sm text-secondary">
+            Автор: {article.author} ·{" "}
+            <time dateTime={article.datePublished}>
+              {formatDateBg(article.datePublished)}
+            </time>
+          </p>
+          <div
+            className="prose-nen mx-auto mt-6"
+            dangerouslySetInnerHTML={{ __html: article.html }}
+          />
         </div>
-      </main>
+      </section>
+
+      {relatedServices.length ? (
+        <section className="bg-soft">
+          <div className="mx-auto max-w-[1140px] px-4 py-2">
+            <RelatedServices services={relatedServices} />
+          </div>
+        </section>
+      ) : null}
+
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1140px] px-4 py-2">
+          <AuthorBox variant="article" dateModified={article.dateModified} />
+        </div>
+      </section>
+
+      {/* Оферта (тъмна лента) */}
+      <section className="bg-carbon-gradient py-16 md:py-20">
+        <div className="mx-auto max-w-[1140px] px-4 text-center">
+          <h2 data-reveal className="text-2xl font-bold text-white md:text-3xl">
+            Вземи оферта до 1 час
+          </h2>
+          <p data-reveal className="mx-auto mt-3 max-w-xl text-white/70">
+            Опиши какво местим — връщаме се с цена до 1 час в работно време.
+          </p>
+          <div className="mx-auto mt-8 max-w-xl text-left">
+            <QuoteForm variant="moving" compact dark />
+          </div>
+        </div>
+      </section>
+
+      {moreArticles.length ? (
+        <section className="bg-soft">
+          <div className="mx-auto max-w-[1140px] px-4 py-2">
+            <RelatedArticles articles={moreArticles} title="Още от блога" />
+          </div>
+        </section>
+      ) : null}
+
       <CtaBanner />
     </>
-  );
-}
-
-function MoreArticles({ current }: { current: BlogArticle }) {
-  const others = getBlogArticles()
-    .filter((a) => a.slug !== current.slug)
-    .slice(0, 4);
-  return (
-    <nav aria-label="Още от блога" className="mt-6 rounded-xl border border-black/10 bg-white p-5">
-      <h2 className="font-sans text-base font-semibold mb-3">Още от блога</h2>
-      <ul className="space-y-2.5 text-[15px]">
-        {others.map((a) => (
-          <li key={a.slug}>
-            <Link
-              href={a.urlPath}
-              className="text-secondary hover:text-primary leading-snug"
-            >
-              {a.h1}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
   );
 }
 

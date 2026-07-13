@@ -6,7 +6,7 @@ description: "Подарък за нов дом — над 20 идеи по бю
 h1: "Подарък за нов дом — какво се носи в нова къща?"
 datePublished: "2024-10-07"
 dateModified: "2026-07-11"
-author: "Георги Ненчовски"
+author: "Силвия Ненчовска"
 cover: "/wp-content/uploads/2024/10/%D0%BA%D0%B0%D0%BA%D0%B2%D0%BE-%D1%81%D0%B5-%D0%BD%D0%BE%D1%81%D0%B8-%D0%B2-%D0%BD%D0%BE%D0%B2%D0%B0-%D0%BA%D1%8A%D1%89%D0%B0-11.webp"
 coverAlt: "Какво се носи в нова къща — подаръци за новодомци от Хамали Ненчовски"
 gscClicks: 9710

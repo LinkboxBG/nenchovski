@@ -5,9 +5,10 @@ import { SITE } from "@/data/site";
 export const runtime = "nodejs";
 
 /**
- * Контакт форма: zod валидация + honeypot + per-IP rate limit + снимки
- * (само изображения, ≤5 бр., ≤5 MB). Доставка: Resend (щом RESEND_API_KEY
- * е наличен в env) — иначе само лог. Google Sheets append: Phase 2.
+ * Контакт форма: zod валидация + honeypot + per-IP rate limit.
+ * Доставка: Resend (щом RESEND_API_KEY е наличен в env) — иначе само лог.
+ * Google Sheets append: Phase 2.
+ * Снимки на обекта се изпращат отделно през Viber — не се качват тук.
  * Нищо от подаденото не се рендерира обратно като HTML.
  */
 
@@ -17,6 +18,7 @@ const schema = z.object({
   from: z.string().max(200).optional().or(z.literal("")),
   to: z.string().max(200).optional().or(z.literal("")),
   date: z.string().max(20).optional().or(z.literal("")),
+  variant: z.enum(["moving", "onsite"]).optional().default("moving"),
   website: z.literal("").optional().or(z.undefined()), // honeypot
 });
 
@@ -67,6 +69,7 @@ export async function POST(req: NextRequest) {
     from: fd.get("from") ?? "",
     to: fd.get("to") ?? "",
     date: fd.get("date") ?? "",
+    variant: fd.get("variant") || undefined,
     website: fd.get("website") ?? "",
   });
   if (!parsed.success) {
@@ -76,41 +79,21 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const photos = (fd.getAll("photos") as File[]).filter((f) => f.size > 0);
-  if (photos.length > 5) {
-    return NextResponse.json(
-      { ok: false, error: "Максимум 5 снимки." },
-      { status: 400 }
-    );
-  }
-  for (const f of photos) {
-    if (f.size > 5 * 1024 * 1024 || !f.type.startsWith("image/")) {
-      return NextResponse.json(
-        { ok: false, error: "Снимките трябва да са изображения до 5 MB." },
-        { status: 400 }
-      );
-    }
-  }
-
   const d = parsed.data;
   const lines = [
     `Ново запитване от nenchovski.com`,
+    `Тип: ${d.variant === "onsite" ? "Обект (къртене/почистване/извозване)" : "Преместване"}`,
     `Телефон: ${d.phone}`,
     `Описание: ${d.message}`,
-    d.from ? `Откъде: ${d.from}` : "",
+    d.from
+      ? `${d.variant === "onsite" ? "Адрес на обекта" : "Откъде"}: ${d.from}`
+      : "",
     d.to ? `Накъде: ${d.to}` : "",
     d.date ? `Дата: ${d.date}` : "",
-    `Снимки: ${photos.length}`,
   ].filter(Boolean);
 
   const apiKey = process.env.RESEND_API_KEY;
   if (apiKey) {
-    const attachments = await Promise.all(
-      photos.map(async (f) => ({
-        filename: f.name.replace(/[^\w.\-а-яА-Я]/g, "_").slice(0, 80),
-        content: Buffer.from(await f.arrayBuffer()).toString("base64"),
-      }))
-    );
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -123,7 +106,6 @@ export async function POST(req: NextRequest) {
         to: [process.env.CONTACT_TO ?? SITE.email],
         subject: `Запитване от сайта — ${d.phone}`,
         text: lines.join("\n"),
-        attachments,
       }),
     });
     if (!res.ok) {
@@ -137,7 +119,7 @@ export async function POST(req: NextRequest) {
     // Няма ключ (staging) — логваме без лични данни в клартекст извън Vercel logs
     console.log("[contact] заявка приета (без Resend ключ):", {
       phone: d.phone.slice(0, 4) + "***",
-      photos: photos.length,
+      variant: d.variant,
     });
   }
 

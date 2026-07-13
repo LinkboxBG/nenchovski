@@ -34,18 +34,20 @@ export function ReviewsSection({ limit = 3 }: { limit?: number }) {
             href={agg.sourceUrl ?? SITE.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-sans text-sm font-medium text-secondary hover:text-primary"
+            className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-secondary hover:text-primary"
           >
-            ⭐ {String(agg.rating).replace(".", ",")} от {agg.count} ревюта в
-            Google →
+            <StarIcon />
+            {String(agg.rating).replace(".", ",")} от {agg.count} ревюта в Google
+            →
           </a>
         ) : null}
       </div>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div data-reveal-stagger className="grid gap-4 md:grid-cols-3">
         {list.map((r) => (
           <figure
             key={r.author + (r.date ?? "")}
-            className="rounded-xl border border-black/10 bg-white p-5 shadow-sm"
+            data-reveal
+            className="rounded-2xl border border-black/10 bg-white p-5 shadow-card transition-shadow duration-300 hover:shadow-premium"
           >
             <div className="text-amber-500 text-sm" aria-label={`${r.rating} от 5 звезди`}>
               {"★".repeat(Math.round(r.rating))}
@@ -77,5 +79,20 @@ export function ReviewsSection({ limit = 3 }: { limit?: number }) {
         ))}
       </div>
     </section>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="text-primary"
+      aria-hidden
+    >
+      <path d="M12 2.5l2.98 6.04 6.67.97-4.83 4.7 1.14 6.65L12 17.77l-5.96 3.13 1.14-6.65-4.83-4.7 6.67-.97L12 2.5Z" />
+    </svg>
   );
 }

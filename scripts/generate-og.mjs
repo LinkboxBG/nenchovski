@@ -33,12 +33,39 @@ function collect(dir) {
 collect("src/content/pages");
 collect("src/content/blog");
 
+// Enrichment херо снимките (redesign 07.2026) имат приоритет пред frontmatter
+// cover — OG-то трябва да съвпада с това, което посетителят вижда на страницата.
+function overlayEnrichment(file) {
+  const full = path.join(root, file);
+  if (!existsSync(full)) return;
+  const src = readFileSync(full, "utf8");
+  const re = /"([a-z0-9_-]+)":\s*\{\s*hero:\s*\{[^}]*?image:\s*\n?\s*"([^"]+)"/gs;
+  let m;
+  while ((m = re.exec(src))) {
+    const [, slug, img] = m;
+    const abs = path.join(root, "public", decodeURIComponent(img));
+    if (existsSync(abs)) jobs.set(slug, abs);
+    else console.warn(`⚠ enrichment херо липсва за ${slug}: ${img}`);
+  }
+}
+overlayEnrichment("src/data/enrichment/premestvane.ts");
+overlayEnrichment("src/data/enrichment/karti.ts");
+overlayEnrichment("src/data/enrichment/transport.ts");
+
 // Статични страници
 const DEFAULT_COVER = path.join(
   root,
   "public/wp-content/uploads/2023/12/Хамали-София-Ненчовски-Транспорт-корица.webp"
 );
-for (const key of ["home", "ceni", "za-nas", "kontakti", "porachai", "blog"]) {
+for (const key of [
+  "home",
+  "ceni",
+  "za-nas",
+  "kontakti",
+  "porachai",
+  "blog",
+  "politika-za-poveritelnost",
+]) {
   if (!jobs.has(key)) jobs.set(key, DEFAULT_COVER);
 }
 

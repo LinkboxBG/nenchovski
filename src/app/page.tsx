@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { QuoteForm } from "@/components/QuoteForm";
-import { TrustStrip } from "@/components/TrustStrip";
+import { AuthorityStrip } from "@/components/AuthorityStrip";
+import { RelatedArticles } from "@/components/RelatedArticles";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { PriceTable } from "@/components/PriceTable";
 import {
-  ServiceCard,
   StepsHowWeWork,
   FAQAccordion,
   AreasServed,
   CtaBanner,
 } from "@/components/Sections";
 import { SITE } from "@/data/site";
-import { PRICE_FROM } from "@/data/pricing";
+import { NAV_GROUPS } from "@/data/nav";
+import { getBlogArticles } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Хамали София — цени от 12,50 €/ч | Хамали Ненчовски",
@@ -37,7 +39,7 @@ const HOME_FAQ = [
   },
   {
     q: "Колко бързо можете да дойдете?",
-    a: "Работим 7 дни в седмицата в цяла София. При свободен екип можем да реагираме още същия ден, а оферта получаваш до 1 час в работно време.",
+    a: "Работим понеделник–събота, 08:00–18:00 ч., в цяла София. При свободен екип можем да реагираме още същия ден, а оферта получаваш до 1 час в работно време.",
   },
   {
     q: "Работите ли извън София?",
@@ -56,52 +58,20 @@ const HERO_POSTER = encodeURI(
   "https://res.cloudinary.com/py4moij3/video/upload/so_0,w_1920,q_auto,f_jpg/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.jpg"
 );
 
-const SERVICES = [
-  {
-    href: "/premestvane-na-doma/",
-    title: "Преместване на дома",
-    text: "Цялостно преместване на апартаменти и къщи — с опаковане, разглобяване и сглобяване на мебелите.",
-    priceFrom: PRICE_FROM.hamalin,
-    image:
-      "/wp-content/uploads/2023/12/Хамали-София-Ненчовски-Транспорт-корица.webp",
-    imageAlt: "Преместване на дома в София — екип на Хамали Ненчовски",
-  },
-  {
-    href: "/premestvane-na-ofisi/",
-    title: "Преместване на офиси",
-    text: "Бързо преместване на офиси и търговски обекти — извън работно време, без прекъсване на бизнеса.",
-    priceFrom: PRICE_FROM.hamalin,
-  },
-  {
-    href: "/karti-chisti-izvozva/",
-    title: "Кърти, чисти, извозва",
-    text: "Къртене на бани, стени и бетон, почистване след ремонт и извозване на строителни отпадъци.",
-    priceFrom: PRICE_FROM.hamalin,
-  },
-  {
-    href: "/premestvane-na-mebeli/",
-    title: "Преместване на мебели",
-    text: "Пренасяне на тежки и обемни мебели — дивани, гардероби, хладилници, пиана.",
-    priceFrom: PRICE_FROM.hamalin,
-  },
-  {
-    href: "/bus-pod-naem/",
-    title: "Бус под наем",
-    text: "Мини ван, микробус 14 м³ или камион 20 м³ с шофьор — за София и цялата страна.",
-    priceFrom: PRICE_FROM.minivan,
-  },
-  {
-    href: "/pochistvane-na-mazeta-sofia/",
-    title: "Почистване на мазета и тавани",
-    text: "Разчистване на мазета, тавани и дворове с извозване на всичко ненужно.",
-    priceFrom: PRICE_FROM.hamalin,
-  },
-];
-
 export default function HomePage() {
+  const blogTeasers = getBlogArticles()
+    .slice(0, 3)
+    .map((a) => ({
+      urlPath: a.urlPath,
+      title: a.h1,
+      cover: a.cover,
+      coverAlt: a.coverAlt,
+    }));
+
   return (
     <>
-      <section className="relative overflow-hidden bg-[#1c1b1b] border-b border-black/5">
+      {/* Видео херо */}
+      <section className="relative isolate overflow-hidden bg-carbon">
         {/* dangerouslySetInnerHTML: React не сериализира muted при SSR, а без него autoplay не тръгва */}
         <div
           aria-hidden="true"
@@ -112,32 +82,30 @@ export default function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/45"
+          className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45"
         />
-        <div className="relative mx-auto max-w-[1140px] px-4 py-10 md:py-16 grid gap-10 lg:grid-cols-[1fr_400px] items-center">
+        <div className="relative mx-auto grid max-w-[1140px] items-center gap-10 px-4 py-14 md:py-20 lg:grid-cols-[1fr_400px]">
           <div className="min-w-0">
-            <h1
-              className="text-4xl md:text-5xl leading-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]"
-              style={{ color: "#fff" }}
-            >
+            <h1 className="text-4xl leading-tight text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.6)] md:text-5xl">
               Хамали София — преместване без стрес
             </h1>
-            <p className="mt-4 text-lg text-white/90 max-w-xl leading-relaxed">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/90">
               Хамали Ненчовски мести домове и офиси в София вече{" "}
               <strong>18 години (от 2008 г.)</strong>. Кърти, чисти, извозва.
               Реални цени, точни екипи и оферта до 1 час.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href={`tel:+359${SITE.phone.slice(1)}`}
                 data-ga-event="tel_click"
-                className="rounded-lg bg-primary hover:bg-accent text-white font-sans font-bold text-lg px-6 py-3.5 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg bg-red-gradient px-6 py-3.5 font-sans text-lg font-bold text-white shadow-premium transition-transform duration-300 hover:-translate-y-0.5"
               >
-                📞 {SITE.phoneDisplay}
+                <PhoneIcon />
+                {SITE.phoneDisplay}
               </a>
               <Link
                 href="/ceni/"
-                className="font-sans font-semibold text-white underline underline-offset-4"
+                className="inline-flex items-center gap-1.5 font-sans font-semibold text-white underline underline-offset-4"
               >
                 Виж всички цени →
               </Link>
@@ -147,19 +115,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      <TrustStrip />
+      <AuthorityStrip variant="stats" />
 
-      <main className="mx-auto max-w-[1140px] px-4">
-        <section aria-labelledby="services-h" className="my-12">
-          <h2 id="services-h" className="text-2xl md:text-3xl mb-6">
+      {/* Услуги по групи */}
+      <section aria-labelledby="services-h" className="bg-paper">
+        <div className="mx-auto max-w-[1140px] px-4 py-14 md:py-20">
+          <h2 id="services-h" data-reveal className="text-2xl md:text-3xl">
             Хамалски услуги в София
           </h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((s) => (
-              <ServiceCard key={s.href} {...s} />
+          <div className="mt-2 h-1 w-12 rounded-full bg-red-gradient" aria-hidden />
+          <div
+            data-reveal-stagger
+            className="mt-10 grid gap-6 sm:grid-cols-2"
+          >
+            {NAV_GROUPS.map((group) => (
+              <GroupCard key={group.id} group={group} />
             ))}
           </div>
-          <p className="mt-5 font-sans">
+          <p className="mt-8 font-sans">
             <Link
               href="/hamalski-uslugi/"
               className="font-semibold text-primary underline underline-offset-4"
@@ -167,38 +140,130 @@ export default function HomePage() {
               Всички услуги и цени →
             </Link>
           </p>
-        </section>
+        </div>
+      </section>
 
-        <StepsHowWeWork />
+      <AuthorityStrip variant="corporate" />
 
-        <section aria-labelledby="prices-h" className="my-12">
-          <h2 id="prices-h" className="text-2xl md:text-3xl mb-6">
+      {/* Цени */}
+      <section aria-labelledby="prices-h" className="bg-soft">
+        <div className="mx-auto max-w-[1140px] px-4 py-14 md:py-20">
+          <h2 id="prices-h" data-reveal className="text-2xl md:text-3xl">
             Цени на хамалските услуги — 2026
           </h2>
-          <PriceTable />
-        </section>
+          <div className="mt-2 h-1 w-12 rounded-full bg-red-gradient" aria-hidden />
+          <div className="mt-8" data-reveal>
+            <PriceTable />
+          </div>
+        </div>
+      </section>
 
-        <ReviewsSection />
-        <FAQAccordion faq={HOME_FAQ} />
-        <AreasServed />
+      <StepsHowWeWork />
 
-        <section aria-labelledby="blog-h" className="my-12">
-          <h2 id="blog-h" className="text-2xl mb-4">
-            Полезно от блога
-          </h2>
-          <p className="text-secondary max-w-2xl">
-            Съвети за преместване, опаковане и подреждане на дома —{" "}
-            <Link
-              href="/blog/"
-              className="text-primary underline underline-offset-2"
-            >
-              разгледай блога ни
-            </Link>
-            .
-          </p>
-        </section>
-      </main>
+      {/* Ревюта + ЧЗВ */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1140px] px-4 py-2">
+          <ReviewsSection />
+          <FAQAccordion faq={HOME_FAQ} />
+          <AreasServed />
+        </div>
+      </section>
+
+      {/* Блог тийзър */}
+      <section className="bg-soft">
+        <div className="mx-auto max-w-[1140px] px-4 py-2">
+          <RelatedArticles articles={blogTeasers} title="Полезно от блога" />
+        </div>
+      </section>
+
       <CtaBanner />
     </>
+  );
+}
+
+/* ---------- Групова карта (услуги) ---------- */
+function GroupCard({ group }: { group: (typeof NAV_GROUPS)[number] }) {
+  return (
+    <div
+      data-reveal
+      className="group flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-premium"
+    >
+      <Link href={group.href} className="relative block aspect-[16/9] overflow-hidden bg-soft">
+        <Image
+          src={group.image}
+          alt={group.imageAlt}
+          fill
+          loading="lazy"
+          sizes="(max-width: 640px) 100vw, 50vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <span className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" aria-hidden />
+        <span className="absolute bottom-3 left-4 right-4">
+          <span className="block font-sans text-lg font-bold text-white [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+            {group.label}
+          </span>
+        </span>
+      </Link>
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-sm text-secondary">{group.tagline}</p>
+        <ul className="mt-4 space-y-1.5 font-sans text-[15px]">
+          {group.items.slice(0, 5).map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className="group/link inline-flex items-center gap-1.5 text-ink transition-colors hover:text-primary"
+              >
+                <ArrowIcon className="text-primary transition-transform duration-300 group-hover/link:translate-x-0.5" />
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link
+          href={group.href}
+          className="mt-4 inline-flex items-center gap-1 font-sans text-sm font-semibold text-primary hover:text-accent"
+        >
+          Виж всички
+          <ArrowIcon />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z" />
+    </svg>
+  );
+}
+
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
   );
 }

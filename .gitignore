@@ -41,3 +41,9 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# лични/работни файлове (redesign 07.2026)
+IK-image.jpg
+pexels/
+image-inventory.json
+image-audit.json

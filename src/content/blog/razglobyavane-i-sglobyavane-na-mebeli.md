@@ -7,7 +7,7 @@ h1: "Разглобяване и сглобяване на мебели"
 datePublished: "2023-09-01"
 estimatedDate: true
 dateModified: "2026-07-11"
-author: "Георги Ненчовски"
+author: "Силвия Ненчовска"
 cover: "/wp-content/uploads/2023/09/%D0%A0%D0%B0%D0%B7%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%B8-%D1%81%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-4.jpg"
 coverAlt: "Разглобяване и сглобяване на мебели — инструменти и съвети"
 gscClicks: 5

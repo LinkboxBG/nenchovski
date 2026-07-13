@@ -7,7 +7,7 @@ h1: "8 Трика за преместване на тежки мебели"
 datePublished: "2020-01-01"
 estimatedDate: true
 dateModified: "2026-07-11"
-author: "Георги Ненчовски"
+author: "Силвия Ненчовска"
 cover: "/wp-content/uploads/elementor/thumbs/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-2-rmc372j1vlx7yhu2y48eqqi1d2qujjjg7kubgtvmis.webp"
 coverAlt: "Преместване на тежки мебели — 8 трика от Хамали Ненчовски"
 gscClicks: 465

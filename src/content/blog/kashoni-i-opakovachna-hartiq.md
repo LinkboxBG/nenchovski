@@ -7,7 +7,7 @@ h1: "Кашони и опаковъчна хартия: Как да подгот
 datePublished: "2020-02-01"
 estimatedDate: true
 dateModified: "2026-07-11"
-author: "Георги Ненчовски"
+author: "Силвия Ненчовска"
 cover: "/wp-content/uploads/2020/02/%D0%BA%D0%B0%D1%88%D0%BE%D0%BD%D0%B8-%D0%B8-%D0%BE%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8A%D1%87%D0%BD%D0%B0-%D1%85%D0%B0%D1%80%D1%82%D0%B8%D1%8F-%D1%82%D0%BE%D1%87%D0%BA%D0%B0-1.jpg"
 coverAlt: "Кашони и опаковъчна хартия за подготовка на багажа при преместване"
 gscClicks: 15
