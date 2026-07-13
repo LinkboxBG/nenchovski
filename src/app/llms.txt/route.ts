@@ -1,4 +1,5 @@
 import { SITE } from "@/data/site";
+import { NAV_GROUPS, FEATURED_ARTICLES } from "@/data/nav";
 import {
   PRICES,
   formatPrice,
@@ -36,11 +37,25 @@ export function GET() {
     .join("\n");
   const demolitionPrices = DEMOLITION_GROUPS.map(pkgLines).join("\n");
 
+  // Услуги — data-driven от навигацията (4-те групи). Самосинхронизира се:
+  // нова услуга в NAV_GROUPS → влиза автоматично и тук.
+  const serviceGroups = NAV_GROUPS.map((g) => {
+    const items = g.items
+      .map((it) => `- [${it.label}](${SITE.domain}${encodeURI(it.href)})`)
+      .join("\n");
+    return `### ${g.label}\n${g.tagline}.\n\n${items}`;
+  }).join("\n\n");
+
+  // Водещи блог статии (Cyrillic href → encodeURI, както в sitemap.ts)
+  const featured = FEATURED_ARTICLES.map(
+    (a) => `- [${a.label}](${SITE.domain}${encodeURI(a.href)})`
+  ).join("\n");
+
   const body = `# Хамали Ненчовски (nenchovski.com)
 
-> Хамалски и транспортни услуги в София и цялата страна от 2008 г. (18 години опит). Преместване на домове и офиси, кърти-чисти-извозва, почистване на мазета и тавани, бус под наем, кашони и опаковъчни материали. Работим понеделник–събота, 08:00–18:00 ч. (неделя — почивен ден). Телефон: ${SITE.phoneDisplay}. Оферта до 1 час в работно време.
+> Хамалски и транспортни услуги в София и цялата страна от ${SITE.foundingYear} г. (${SITE.yearsExperience} години опит). Преместване на домове и офиси, кърти-чисти-извозва, почистване на мазета и тавани, бус под наем, кашони и опаковъчни материали. ${SITE.workingHoursLong} Телефон: ${SITE.phoneDisplay}. Оферта до 1 час в работно време.
 
-Фирма: ${SITE.legalName}, ЕИК ${SITE.eik}, ${SITE.address.city}, ${SITE.address.quarter}, ${SITE.address.street}.
+Фирма: ${SITE.legalName}, ЕИК ${SITE.eik}, ${SITE.address.city}, ${SITE.address.quarter}, ${SITE.address.street}. Собственици: ${SITE.owners.georgi} (управител) и ${SITE.owners.silvia} (счетоводство и корпоративни оферти).
 
 ## Пакетни цени 2026 (водещи, EUR)
 
@@ -56,26 +71,33 @@ ${prices}
 
 Машинночетими цени: ${SITE.domain}/pricing.md
 
-## Основни услуги
+## Услуги
 
-- [Хамалски услуги София](${SITE.domain}/hamalski-uslugi/): пилар страница — всички услуги, квартали, междуградски и международни курсове
-- [Цени](${SITE.domain}/hamalski-uslugi/#ceni): пълна ценова листа 2026
-- [Преместване на дома](${SITE.domain}/premestvane-na-doma/)
-- [Преместване на офиси](${SITE.domain}/premestvane-na-ofisi/)
-- [Преместване на мебели](${SITE.domain}/premestvane-na-mebeli/)
-- [Кърти, чисти, извозва](${SITE.domain}/karti-chisti-izvozva/): къртене на баня, стени, бетон + извозване
-- [Извозване на строителни отпадъци](${SITE.domain}/izvozvane-na-stroitelni-otpadatsi-sofiya/)
-- [Изхвърляне на стари мебели](${SITE.domain}/izhvurlyane-na-stari-mebeli/)
-- [Почистване на мазета](${SITE.domain}/pochistvane-na-mazeta-sofia/)
-- [Бус под наем](${SITE.domain}/bus-pod-naem/)
-- [Кашони за преместване](${SITE.domain}/kashoni/)
-- [Международно преместване](${SITE.domain}/mezhdunarodno-premestvane/)
+${serviceGroups}
+
+[Пълна ценова листа 2026](${SITE.domain}/hamalski-uslugi/#ceni)
+
+## Заяви оферта
+
+- [Поискай оферта](${SITE.domain}/porachai/): безплатен оглед, оферта до 1 час в работно време. Тел. ${SITE.phoneDisplay}.
 
 ## Фирма
 
-- [За нас](${SITE.domain}/za-nas/): историята от 2008 г., Георги и Силвия Ненчовски
+- [За нас](${SITE.domain}/za-nas/): историята от ${SITE.foundingYear} г., ${SITE.owners.georgi} и ${SITE.owners.silvia}
+- [Клиенти и препоръки](${SITE.domain}/preporachai-hamali-nenhcovski/): портфолио и референции от клиенти
 - [Контакти](${SITE.domain}/kontakti/): ${SITE.phoneDisplay}, ${SITE.email}
 - [Блог](${SITE.domain}/blog/): съвети за преместване и дома
+
+## Блог — водещи статии
+
+${featured}
+
+## Профили и отзиви
+
+- Google Business профил (отзиви): ${SITE.social.google}
+- Facebook: ${SITE.social.facebook}
+- Instagram: ${SITE.social.instagram}
+- TikTok: ${SITE.social.tiktok}
 
 ## Покритие
 
