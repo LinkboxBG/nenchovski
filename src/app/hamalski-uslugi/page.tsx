@@ -33,6 +33,7 @@ import { FactorGrid, ChecklistCard } from "@/components/InfoCards";
 import { SITE } from "@/data/site";
 import { NAV_GROUPS } from "@/data/nav";
 import { getBlogArticles } from "@/lib/content";
+import { PILLAR_GALLERY } from "@/data/galleries";
 import { CeniViewTracker } from "./tracker";
 
 /**
@@ -363,41 +364,8 @@ const PILLAR_FAQ = [
   },
 ];
 
-/** Галерия — реални снимки от обекти (същите активи като досега). */
-const GALLERY = [
-  {
-    src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.08.webp",
-    alt: "Хамали местят офис шкаф на количка — хамалски услуги",
-  },
-  {
-    src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.05.webp",
-    alt: "Стек от опаковани кашони, готови за преместване",
-  },
-  {
-    src: "/wp-content/uploads/elementor/thumbs/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-3-rmc37cv9ysbdi7f29qpb05w3wbbvw7ohx00nqvgamc.jpg",
-    alt: "Опаковане на голяма мебел със стреч фолио преди пренасяне",
-  },
-  {
-    src: "/wp-content/uploads/elementor/thumbs/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-7-1-rmc372j1vlx7yhu2y48eqqi1d2qujjjg7kubgtvmis.webp",
-    alt: "Хамали повдигат тежка техника с транспортни ремъци",
-  },
-  {
-    src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.01.webp",
-    alt: "Разтоварване на едрогабаритна техника с колесар",
-  },
-  {
-    src: "/wp-content/uploads/elementor/thumbs/%D0%91%D1%83%D1%81-%D0%BF%D0%BE%D0%B4-%D0%BD%D0%B0%D0%B5%D0%BC.05-rmfygbslozld4zbpfg6cw4wgm6ge2ya77md86ewot4.webp",
-    alt: "Бус с отворен товарен отсек и спусната рампа",
-  },
-  {
-    src: "/wp-content/uploads/elementor/thumbs/%D0%91%D1%83%D1%81-%D0%BF%D0%BE%D0%B4-%D0%BD%D0%B0%D0%B5%D0%BC.01-rmfyal0ew4pt51kober0zkr8auly606m1htm9bx964.webp",
-    alt: "Бус на Хамали Ненчовски, готов за товарене",
-  },
-  {
-    src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.17.webp",
-    alt: "Хамалин товари кашони в бус на Ненчовски на улица в София",
-  },
-];
+/** Галерия — реални курирани кадри „От нашата работа" (виж galleries.ts). */
+const GALLERY = PILLAR_GALLERY;
 
 /* ------------------------------------------------------------------ */
 /* Страницата                                                          */

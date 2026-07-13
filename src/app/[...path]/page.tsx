@@ -307,7 +307,7 @@ function ServiceView({ page }: { page: ServicePage }) {
       {gallery.length ? (
         <section className="bg-soft">
           <div className="mx-auto max-w-[1140px] px-4 py-2">
-            <Gallery images={gallery} />
+            <Gallery images={gallery} title={enrichment.galleryTitle} />
           </div>
         </section>
       ) : null}
