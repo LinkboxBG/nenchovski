@@ -54,8 +54,9 @@ const HOME_FAQ = [
 const HERO_VIDEO = encodeURI(
   "https://res.cloudinary.com/py4moij3/video/upload/w_1920,q_auto/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.mp4"
 );
+// w_1080 (не 1920): постерът е LCP на мобилни — по-лек файл + preload по-долу
 const HERO_POSTER = encodeURI(
-  "https://res.cloudinary.com/py4moij3/video/upload/so_0,w_1920,q_auto,f_jpg/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.jpg"
+  "https://res.cloudinary.com/py4moij3/video/upload/so_0,w_1080,q_auto,f_jpg/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.jpg"
 );
 
 export default function HomePage() {
@@ -70,6 +71,13 @@ export default function HomePage() {
 
   return (
     <>
+      {/* React 19 hoist-ва <link> в <head>: постерът е LCP — preload с висок приоритет */}
+      <link
+        rel="preload"
+        as="image"
+        href={HERO_POSTER}
+        fetchPriority="high"
+      />
       {/* Видео херо */}
       <section className="relative isolate overflow-hidden bg-carbon">
         {/* dangerouslySetInnerHTML: React не сериализира muted при SSR, а без него autoplay не тръгва */}
