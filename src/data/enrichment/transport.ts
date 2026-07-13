@@ -13,6 +13,8 @@ export const TRANSPORT_ENRICHMENT: Partial<
       alt: "Брандиран камион на Хамали Ненчовски — бус под наем с шофьор",
       badges: ["От 2008 г. — 18 години опит", "Плащане след свършена работа"],
     },
+    // B2B hero (лого marquee в херото); stats лентата няма лога → няма конфликт.
+    heroVariant: "b2b",
     authority: "stats",
     gallery: [
       {

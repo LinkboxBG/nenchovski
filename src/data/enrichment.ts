@@ -73,6 +73,22 @@ export interface PageEnrichment {
     badges?: string[];
   };
   authority?: AuthorityVariant | null;
+  /**
+   * "b2b" → hero с корпоративен кредибилити блок + лого marquee.
+   * Само за активни B2B услуги (ofisi, bus-pod-naem); страницата НЕ бива
+   * да е и authority:"corporate" (двойна лого стена).
+   */
+  heroVariant?: "b2b";
+  /**
+   * Ред от pricing.ts PRICES за визуален highlight в ценовата таблица.
+   * Липсва → heuristic в ServiceView (transport→mikrobus, иначе hamalin).
+   */
+  priceHighlight?: "hamalin" | "minivan" | "mikrobus" | "kamion";
+  /**
+   * Реални преди/после двойки (BeforeAfter слайдер). ПРАЗНО, докато клиентът
+   * не подаде истински двойки — НЕ сдвоявай несвързани снимки от галериите.
+   */
+  beforeAfter?: { before: GalleryImage; after: GalleryImage }[];
   gallery?: GalleryImage[];
   relatedArticles?: ArticleSlug[];
   formVariant?: FormVariant;

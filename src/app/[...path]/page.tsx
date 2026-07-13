@@ -20,11 +20,14 @@ import { AuthorBox } from "@/components/AuthorBox";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { RelatedServices } from "@/components/RelatedServices";
 import { ServiceNotice } from "@/components/ServiceNotice";
+import { BeforeAfter } from "@/components/BeforeAfter";
 import { SERVICE_NOTICES } from "@/data/notices";
 import {
   getPageEnrichment,
   getArticleEnrichment,
 } from "@/data/enrichment";
+import { themeFor } from "@/data/categoryTheme";
+import reviews from "@/data/reviews.json";
 import {
   Breadcrumbs,
   FAQAccordion,
@@ -147,6 +150,15 @@ function ServiceView({ page }: { page: ServicePage }) {
 
   const gallery = enrichment.gallery ?? [];
 
+  // Дискретна категорийна сигнатура: data-cat сетва --cat/--cat-deep/--cat-bright
+  // (globals.css); null (utility) → без атрибут → червен default навсякъде.
+  const theme = themeFor(page.category);
+
+  // Най-релевантното перо в ценовата таблица за тази услуга (само визуално).
+  const priceHighlight =
+    enrichment.priceHighlight ??
+    (page.category === "transport" ? "mikrobus" : "hamalin");
+
   const relatedArticles = (enrichment.relatedArticles ?? [])
     .map((slug) => getBlogArticles().find((a) => a.slug === slug))
     .filter(Boolean)
@@ -158,7 +170,7 @@ function ServiceView({ page }: { page: ServicePage }) {
     }));
 
   return (
-    <>
+    <div data-cat={theme?.id} className="contents">
       {page.slug === "kashoni" ? (
         <JsonLd
           data={productSchema({
@@ -183,7 +195,20 @@ function ServiceView({ page }: { page: ServicePage }) {
         title={page.h1}
         subtitle={page.directAnswer}
         image={heroImage}
-        badges={enrichment.hero?.badges}
+        // GMB блокът в hero-то поема рейтинг badge-а → филтрираме „4,9★…" дубликата
+        badges={enrichment.hero?.badges?.filter((b) => !b.includes("★"))}
+        categoryChip={theme ?? undefined}
+        gmb={
+          isService
+            ? {
+                rating: reviews.aggregate.rating,
+                count: reviews.aggregate.count,
+                url: reviews.aggregate.sourceUrl,
+              }
+            : undefined
+        }
+        priceFrom={isService ? page.priceFrom : undefined}
+        b2b={enrichment.heroVariant === "b2b"}
         breadcrumbsSlot={
           <Breadcrumbs
             dark
@@ -215,7 +240,7 @@ function ServiceView({ page }: { page: ServicePage }) {
           {after !== undefined ? (
             <>
               <div className="mx-auto my-8 max-w-[72ch]">
-                <PriceTable />
+                <PriceTable highlightId={priceHighlight} />
               </div>
               <article
                 className="prose-nen mx-auto"
@@ -225,6 +250,14 @@ function ServiceView({ page }: { page: ServicePage }) {
           ) : null}
         </div>
       </section>
+
+      {enrichment.beforeAfter?.length ? (
+        <section className="bg-soft">
+          <div className="mx-auto max-w-[1140px] px-4 py-2">
+            <BeforeAfter pairs={enrichment.beforeAfter} />
+          </div>
+        </section>
+      ) : null}
 
       {gallery.length ? (
         <section className="bg-soft">
@@ -290,7 +323,7 @@ function ServiceView({ page }: { page: ServicePage }) {
       ) : null}
 
       <CtaBanner />
-    </>
+    </div>
   );
 }
 

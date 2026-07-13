@@ -1,4 +1,5 @@
 import { SITE } from "@/data/site";
+import { FOUNDER, EDITOR } from "@/data/authors";
 import { formatPrice } from "@/data/pricing";
 import { PRICES } from "@/data/pricing";
 import reviews from "@/data/reviews.json";
@@ -20,6 +21,12 @@ export function movingCompanySchema() {
     telephone: `+359${SITE.phone.slice(1)}`,
     email: SITE.email,
     foundingDate: String(SITE.foundingYear),
+    // Person entity: ЛИЧНИЯТ профил на основателя (не фирмените канали)
+    founder: {
+      "@type": "Person",
+      name: FOUNDER.name,
+      sameAs: [FOUNDER.profileUrl],
+    },
     priceRange: "€€",
     address: {
       "@type": "PostalAddress",
@@ -43,7 +50,9 @@ export function movingCompanySchema() {
       opens: SITE.openingHours.opens,
       closes: SITE.openingHours.closes,
     },
-    sameAs: [SITE.googleMapsUrl],
+    // Organization entity: САМО фирмените канали (GMB + фирмен FB + IG).
+    // Личните профили са в Person възлите (founder/author/reviewedBy).
+    sameAs: [SITE.googleMapsUrl, SITE.social.facebook, SITE.social.instagram],
     inLanguage: "bg",
     // AggregateRating само при ≥5 реални ревюта (правилото „no fake data")
     ...(reviews.aggregate &&
@@ -132,11 +141,19 @@ export function articleSchema(opts: {
       url: `${SITE.domain}/za-nas/`,
       sameAs: ["https://www.facebook.com/silvia.bencheva"],
     },
+    // editor И reviewedBy — и двете са валидни CreativeWork свойства;
+    // reviewedBy е сигналът, който Google/AI двигателите четат за ревизия.
     editor: {
       "@type": "Person",
-      name: "Иван Колев",
+      name: EDITOR.name,
       worksFor: { "@type": "Organization", name: "Linkbox.BG" },
-      sameAs: ["https://www.linkedin.com/in/ivnkolev/"],
+      sameAs: [EDITOR.profileUrl],
+    },
+    reviewedBy: {
+      "@type": "Person",
+      name: EDITOR.name,
+      worksFor: { "@type": "Organization", name: "Linkbox.BG" },
+      sameAs: [EDITOR.profileUrl],
     },
     publisher: { "@id": ORG_ID },
     ...(opts.image ? { image: `${SITE.domain}${opts.image}` } : {}),

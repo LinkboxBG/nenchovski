@@ -1,7 +1,13 @@
 import Image from "next/image";
-import { CORPORATE_CLIENTS, COMPANY_STATS, type CorporateClient } from "@/data/clients";
+import {
+  CORPORATE_CLIENTS,
+  CORPORATE_TAGLINE,
+  COMPANY_STATS,
+  type CorporateClient,
+} from "@/data/clients";
 import reviews from "@/data/reviews.json";
 import { CountUp } from "@/components/CountUp";
+import { StarRating } from "@/components/StarRating";
 
 interface AuthorityStripProps {
   variant: "corporate" | "reviews" | "stats";
@@ -47,7 +53,7 @@ function CorporateBand({ className }: { className: string }) {
             <span aria-hidden className="h-px w-7 bg-gradient-to-l from-transparent to-primary" />
           </span>
           <p className="mx-auto max-w-2xl font-sans text-xl font-bold tracking-tight text-white sm:text-2xl">
-            Доверен партньор на институции и банки от 2008 г.
+            {CORPORATE_TAGLINE}
           </p>
         </header>
 
@@ -156,33 +162,6 @@ function ReviewsBand({ className }: { className: string }) {
 function truncate(text: string, max: number): string {
   if (text.length <= max) return text;
   return `${text.slice(0, max).trimEnd()}…`;
-}
-
-function StarRating({ rating }: { rating: number }) {
-  const stars = [0, 1, 2, 3, 4];
-  return (
-    <span className="inline-flex items-center gap-0.5" role="img" aria-label={`${rating} от 5 звезди`}>
-      {stars.map((i) => {
-        const pct = Math.max(0, Math.min(1, rating - i)) * 100;
-        return (
-          <span key={i} className="relative inline-block h-4 w-4">
-            <StarIcon className="absolute inset-0 text-black/15" />
-            <span className="absolute inset-0 overflow-hidden" style={{ width: `${pct}%` }}>
-              <StarIcon className="text-primary" />
-            </span>
-          </span>
-        );
-      })}
-    </span>
-  );
-}
-
-function StarIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
-      <path d="M12 2.5l2.98 6.04 6.67.97-4.83 4.7 1.14 6.65L12 17.77l-5.96 3.13 1.14-6.65-4.83-4.7 6.67-.97L12 2.5Z" />
-    </svg>
-  );
 }
 
 /* ------------------------------------------------------------------ */

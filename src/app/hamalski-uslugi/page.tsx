@@ -17,6 +17,13 @@ import {
   StepsHowWeWork,
   CtaBanner,
 } from "@/components/Sections";
+import {
+  CategoryGlyph,
+  CheckGlyph,
+  ArrowGlyph,
+  PinGlyph,
+} from "@/components/CategoryGlyph";
+import { FactorGrid, ChecklistCard } from "@/components/InfoCards";
 import { SITE } from "@/data/site";
 import { NAV_GROUPS } from "@/data/nav";
 import { getBlogArticles } from "@/lib/content";
@@ -514,25 +521,7 @@ export default function HamalskiUslugiPage() {
           <h3 className="mt-14 font-sans text-xl font-bold">
             Как се формира крайната цена
           </h3>
-          <div data-reveal-stagger className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {PRICE_FACTORS.map((f) => (
-              <div
-                key={f.n}
-                data-reveal
-                className="relative overflow-hidden rounded-2xl bg-carbon p-6 text-white"
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-3 -top-5 font-sans text-[72px] font-bold leading-none text-white/[0.06]"
-                >
-                  {f.n}
-                </span>
-                <span className="font-sans text-sm font-bold text-red-hot">{f.n}</span>
-                <h4 className="mt-2 font-sans text-base font-semibold">{f.t}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-white/65">{f.d}</p>
-              </div>
-            ))}
-          </div>
+          <FactorGrid factors={PRICE_FACTORS} />
 
           {/* Примерни сметки */}
           <h3 className="mt-14 font-sans text-xl font-bold">
@@ -595,40 +584,28 @@ export default function HamalskiUslugiPage() {
 
           {/* Без скрити такси + отстъпка */}
           <div className="mt-14 grid gap-5 md:grid-cols-[1fr_340px]">
-            <div data-reveal className="rounded-2xl border border-black/10 bg-white p-6 shadow-card">
-              <h3 className="font-sans text-xl font-bold">Без скрити такси</h3>
-              <ul className="mt-4 space-y-2.5 text-[15px] leading-relaxed text-secondary">
-                <li className="flex gap-2.5">
-                  <CheckGlyph className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                  <span>
-                    <strong className="text-ink">Фолирането на мебелите е безплатно</strong>{" "}
-                    — част е от услугата, не допълнителен ред във фактурата.
-                  </span>
-                </li>
-                <li className="flex gap-2.5">
-                  <CheckGlyph className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                  <span>
-                    <strong className="text-ink">Етаж, асансьор и паркиране уточняваме предварително</strong>{" "}
-                    — преди екипът да тръгне, не на място пред входа.
-                  </span>
-                </li>
-                <li className="flex gap-2.5">
-                  <CheckGlyph className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                  <span>
-                    <strong className="text-ink">Ако нещо се промени в деня</strong> — например
-                    асансьорът не работи — казваме го веднага и коригираме цената
-                    прозрачно, преди да продължим.
-                  </span>
-                </li>
-                <li className="flex gap-2.5">
-                  <CheckGlyph className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                  <span>
-                    <strong className="text-ink">Кашоните и опаковъчните материали</strong> се
-                    договарят отделно — казваме цената им заедно с офертата.
-                  </span>
-                </li>
-              </ul>
-            </div>
+            <ChecklistCard
+              title="Без скрити такси"
+              items={[
+                <>
+                  <strong className="text-ink">Фолирането на мебелите е безплатно</strong>{" "}
+                  — част е от услугата, не допълнителен ред във фактурата.
+                </>,
+                <>
+                  <strong className="text-ink">Етаж, асансьор и паркиране уточняваме предварително</strong>{" "}
+                  — преди екипът да тръгне, не на място пред входа.
+                </>,
+                <>
+                  <strong className="text-ink">Ако нещо се промени в деня</strong> — например
+                  асансьорът не работи — казваме го веднага и коригираме цената
+                  прозрачно, преди да продължим.
+                </>,
+                <>
+                  <strong className="text-ink">Кашоните и опаковъчните материали</strong> се
+                  договарят отделно — казваме цената им заедно с офертата.
+                </>,
+              ]}
+            />
             <div
               data-reveal
               className="flex flex-col justify-center rounded-2xl bg-red-gradient p-6 text-white shadow-premium"
@@ -1091,115 +1068,5 @@ export default function HamalskiUslugiPage() {
 
       <CtaBanner />
     </>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Локални SVG глифи (2px line, без библиотеки)                        */
-/* ------------------------------------------------------------------ */
-
-function CategoryGlyph({
-  id,
-  className,
-}: {
-  id: "premestvane" | "karti" | "pochistvane" | "transport";
-  className?: string;
-}) {
-  const common = {
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.8,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true,
-    className,
-  };
-  switch (id) {
-    case "premestvane":
-      return (
-        <svg {...common}>
-          <path d="M3 8l9-4 9 4-9 4-9-4Z" />
-          <path d="M3 8v8l9 4 9-4V8" />
-          <path d="M12 12v8" />
-        </svg>
-      );
-    case "karti":
-      return (
-        <svg {...common}>
-          <rect x="12.5" y="2.8" width="4.6" height="7.4" rx="1" transform="rotate(45 14.8 6.5)" />
-          <path d="M12.2 8.8L4 17" />
-          <path d="M3 21l3-3" />
-        </svg>
-      );
-    case "pochistvane":
-      return (
-        <svg {...common}>
-          <path d="M15 3l-4 4" />
-          <path d="M11 7L5 20" />
-          <path d="M11 7l6 3-4 8-7-3.2Z" />
-        </svg>
-      );
-    case "transport":
-      return (
-        <svg {...common}>
-          <path d="M2 7h11v9H2z" />
-          <path d="M13 10h4l3 3v3h-7z" />
-          <circle cx="6" cy="18" r="1.6" />
-          <circle cx="17" cy="18" r="1.6" />
-        </svg>
-      );
-  }
-}
-
-function CheckGlyph({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      className={className}
-    >
-      <path d="M5 13l4 4L19 7" />
-    </svg>
-  );
-}
-
-function ArrowGlyph({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      className={className}
-    >
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
-
-function PinGlyph({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      className={className}
-    >
-      <path d="M12 21s-6-5.686-6-10a6 6 0 1 1 12 0c0 4.314-6 10-6 10Z" />
-      <circle cx="12" cy="11" r="2" />
-    </svg>
   );
 }
