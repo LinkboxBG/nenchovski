@@ -60,6 +60,32 @@ export function PriceTable({ highlightId }: { highlightId?: string }) {
   );
 }
 
+/**
+ * Вторична (демотирана) часова рейткарта — native `<details>`, нула JS.
+ * Пакетните цени водят; тарифата е за прозрачност/детайл.
+ */
+export function RateCardDetails({
+  highlightId,
+  open = false,
+}: {
+  highlightId?: string;
+  open?: boolean;
+}) {
+  return (
+    <details
+      open={open}
+      className="mt-6 rounded-xl border border-black/10 bg-soft px-4 py-3"
+    >
+      <summary className="cursor-pointer font-sans text-[15px] font-semibold text-ink">
+        Детайлна часова тарифа (хамалин, транспорт)
+      </summary>
+      <div className="mt-4">
+        <PriceTable highlightId={highlightId} />
+      </div>
+    </details>
+  );
+}
+
 /** Кратък тийзър „от X €" за секции/карти; dark = върху тъмен фон (hero). */
 export function PriceTeaser({
   from,

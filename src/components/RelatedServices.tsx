@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { formatPrice } from "@/data/pricing";
 
 interface RelatedService {
   href: string;
   label: string;
-  priceFrom?: number;
+  /** Готов ценови етикет, напр. „от 110 €“ или „от 12,50 €/ч“. */
+  priceLabel?: string;
 }
 
 interface RelatedServicesProps {
@@ -34,9 +34,9 @@ export function RelatedServices({
           >
             <span>
               <span className="block font-sans font-medium text-ink">{service.label}</span>
-              {typeof service.priceFrom === "number" ? (
+              {service.priceLabel ? (
                 <span className="mt-0.5 block text-sm text-secondary">
-                  от {formatPrice(service.priceFrom)} €/ч
+                  {service.priceLabel}
                 </span>
               ) : null}
             </span>
