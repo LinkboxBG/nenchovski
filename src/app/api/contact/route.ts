@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
     d.date ? `Дата: ${d.date}` : "",
   ].filter(Boolean);
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
   if (apiKey) {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -101,9 +101,11 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        // `||` (не `??`) — празен низ в env също трябва да падне към default-а.
         from:
-          process.env.CONTACT_FROM ?? "Хамали Ненчовски <onboarding@resend.dev>",
-        to: [process.env.CONTACT_TO ?? SITE.email],
+          process.env.CONTACT_FROM?.trim() ||
+          "Хамали Ненчовски <forma@nenchovski.com>",
+        to: [process.env.CONTACT_TO?.trim() || SITE.email],
         subject: `Запитване от сайта — ${d.phone}`,
         text: lines.join("\n"),
       }),
