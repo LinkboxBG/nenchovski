@@ -29,13 +29,12 @@ const TEAM = [
   {
     name: "Георги Ненчовски",
     role: "Управител",
-    photo:
-      "/wp-content/uploads/2026/04/%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D0%B8-%D0%9D%D0%B5%D0%BD%D1%87%D0%BE%D0%B2%D1%81%D0%BA%D0%B8.webp",
+    photo: "/brand/team/georgi-nenchovski-avatar.webp",
   },
   {
     name: "Силвия Ненчовска",
     role: "Организация и оферти",
-    photo: "/wp-content/uploads/2026/04/%D0%97%D0%B0-%D0%BD%D0%B0%D1%81.27-1.webp",
+    photo: "/brand/team/silviya-nenchovska-avatar.webp",
   },
 ];
 
@@ -53,10 +52,11 @@ export default function ZaNasPage() {
         breadcrumbsSlot={<Breadcrumbs dark items={[{ name: "За нас", url: "/za-nas/" }]} />}
       />
 
-      {/* Разказ */}
+      {/* Разказ + реален кадър на основателите (E-E-A-T: лице до обръщението) */}
       <section className="bg-paper">
         <div className="mx-auto max-w-[1140px] px-4 py-12 md:py-16">
-          <div className="prose-nen mx-auto">
+          <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start lg:gap-12">
+            <div className="prose-nen">
             <p>
               Аз съм <strong>Георги Ненчовски</strong>. През 2008 г. започнах с
               един бус и много желание — днес, 18 години по-късно,{" "}
@@ -120,6 +120,21 @@ export default function ZaNasPage() {
               </a>{" "}
               · Имейл: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
             </p>
+            </div>
+
+            <figure data-reveal className="lg:sticky lg:top-24">
+              <Image
+                src="/brand/team/nenchovski-team.webp"
+                alt="Георги и Силвия Ненчовски — основатели на Хамали Ненчовски"
+                width={720}
+                height={480}
+                sizes="(max-width: 1024px) 100vw, 360px"
+                className="w-full rounded-2xl border border-black/10 object-cover shadow-premium"
+              />
+              <figcaption className="mt-3 text-center font-sans text-sm text-secondary">
+                Георги и Силвия Ненчовски — основателите на фирмата
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>

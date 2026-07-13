@@ -997,7 +997,21 @@ export default function HamalskiUslugiPage() {
             Кой стои зад Хамали Ненчовски
           </h2>
           <div className="mt-2 h-1 w-12 rounded-full bg-red-gradient" aria-hidden />
-          <div className="prose-nen mt-5 max-w-3xl">
+          <div className="mt-5 grid gap-8 lg:grid-cols-[300px_1fr] lg:items-start lg:gap-12">
+            <figure data-reveal className="mx-auto max-w-[300px] lg:sticky lg:top-24">
+              <Image
+                src="/brand/team/biz-portrait-georgi-nenchovski.webp"
+                alt="Георги Ненчовски — основател и управител на Хамали Ненчовски"
+                width={300}
+                height={375}
+                sizes="(max-width: 1024px) 300px, 300px"
+                className="w-full rounded-2xl border border-black/10 object-cover shadow-premium"
+              />
+              <figcaption className="mt-3 text-center font-sans text-sm text-secondary">
+                Георги Ненчовски — основател и управител
+              </figcaption>
+            </figure>
+            <div className="prose-nen max-w-3xl">
             <p>
               Аз съм Георги Ненчовски. От 2008 година вдигам мебели, кашони и
               всякакъв багаж из София — първо сам, с един стар бус и колкото
@@ -1023,6 +1037,7 @@ export default function HamalskiUslugiPage() {
               </Link>
               .
             </p>
+            </div>
           </div>
           <AuthorBox variant="service" />
           <Gallery images={GALLERY} />
