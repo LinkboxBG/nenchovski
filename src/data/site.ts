@@ -10,7 +10,7 @@ export const SITE = {
   name: "Хамали Ненчовски",
   legalName: "Хамалчо ЕООД",
   eik: "206171476",
-  domain: "https://nenchovski.com",
+  domain: "https://www.nenchovski.com",
   foundingYear: 2008,
   yearsExperience: 18, // „18 години опит (от 2008 г.)" — никога „13"
   // Основен CTA номер — Георги го носи на обектите (решение на клиента, 13.07.2026)
