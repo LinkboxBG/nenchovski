@@ -50,7 +50,7 @@ export function MobileMenu() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-label={open ? "Затвори менюто" : "Отвори менюто"}
-        className="relative z-[60] -mr-2 flex h-10 w-10 shrink-0 items-center justify-center lg:hidden"
+        className="relative z-[60] -mr-2 flex h-10 w-10 shrink-0 items-center justify-center xl:hidden"
       >
         <span className="relative block h-5 w-6">
           <span
@@ -75,7 +75,7 @@ export function MobileMenu() {
       <div
         onClick={close}
         aria-hidden
-        className={`fixed inset-0 z-50 bg-black/60 transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-50 bg-black/60 transition-opacity duration-300 xl:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
@@ -85,7 +85,7 @@ export function MobileMenu() {
         role="dialog"
         aria-modal="true"
         aria-label="Мобилно меню"
-        className={`fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-sm flex-col overflow-y-auto bg-carbon shadow-premium transition-transform duration-300 ease-[var(--ease-premium)] lg:hidden ${
+        className={`fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-sm flex-col overflow-y-auto bg-carbon shadow-premium transition-transform duration-300 ease-[var(--ease-premium)] xl:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >

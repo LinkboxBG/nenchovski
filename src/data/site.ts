@@ -3,6 +3,9 @@
  * nenchovski-planning решения от 11.07.2026).
  */
 
+// Актуалният GMB профил (share.google → maps?cid) — канонична връзка към отзивите.
+const GMB_URL = "https://www.google.com/maps?cid=11438262150166059315";
+
 export const SITE = {
   name: "Хамали Ненчовски",
   legalName: "Хамалчо ЕООД",
@@ -47,8 +50,16 @@ export const SITE = {
     ],
   },
   // CID от актуалния GMB профил (share.google линк на клиента, 11.07.2026)
-  googleMapsUrl:
-    "https://www.google.com/maps?cid=11438262150166059315",
+  googleMapsUrl: GMB_URL,
+  // Социални профили — единствен източник за Header (помощна лента) и Footer.
+  // Google → канонична GMB връзка (не search URL с tracking); Facebook = бизнес
+  // страницата (не личния профил на Силвия); Viber → phoneSecondary.
+  social: {
+    google: GMB_URL,
+    facebook:
+      "https://www.facebook.com/p/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%B7%D0%B0-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F-%D0%9D%D0%B5%D0%BD%D1%87%D0%BE%D0%B2%D1%81%D0%BA%D0%B8-%D0%95%D0%9E%D0%9E%D0%94-100057638851637/",
+    instagram: "https://www.instagram.com/ge.nenchovski/",
+  },
   owners: {
     georgi: "Георги Ненчовски",
     silvia: "Силвия Ненчовска",

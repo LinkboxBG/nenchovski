@@ -1,5 +1,10 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { SITE } from "@/data/site";
 import {
   NAV_GROUPS,
   FEATURED_ARTICLES,
@@ -8,111 +13,235 @@ import {
 } from "@/data/nav";
 
 /**
- * Server-rendered, CSS-only mega menu (hover + focus-within, без JS).
- * Всеки връх на групите отваря пълноширочинен панел, позициониран
- * спрямо <header> (position: sticky = containing block), затова
- * междинните <li>/<ul>/<nav> НЕ трябва да получават position — иначе
- * панелът губи пълната ширина.
+ * Premium mega menu с hover-intent (без излишен клик):
+ *  - отваря се на hover/focus, курсорът може да „слезе" в панела (невидим bridge
+ *    + 140ms close-delay премахват мъртвата зона под тригера);
+ *  - затваря се сам при смяна на страницата (usePathname), при Escape и при
+ *    клик на линк — старият CSS-only :hover оставаше „закачен" след SPA навигация.
+ * Панелите са пълноширочинни спрямо <header> (sticky = containing block),
+ * затова междинните <li> НЕ получават position.
  */
 
-const TOP_STATIC_HREFS = ["/ceni/", "/blog/", "/za-nas/", "/kontakti/"] as const;
+// Само комерсиалните връхни линкове остават тук — „За нас"/„Контакти" минаха
+// в помощната лента (по-малко пренасяне на думи в основния ред).
+const TOP_STATIC_HREFS = ["/ceni/", "/blog/"] as const;
 
 const linkCls =
-  "flex items-center gap-1.5 px-3 py-2 rounded-md font-sans text-[14px] font-medium text-white/90 hover:text-white transition-colors";
+  "flex h-full items-center gap-1.5 whitespace-nowrap px-2 font-sans text-[14px] font-medium text-white/85 hover:text-white transition-colors";
 
 export function MegaMenu() {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pathname = usePathname();
+
+  // Затвори при навигация (render-time reset — виж MobileMenu за същия патерн)
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (pathname !== prevPath) {
+    setPrevPath(pathname);
+    setOpenId(null);
+  }
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenId(null);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  const open = (id: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenId(id);
+  };
+  const scheduleClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenId(null), 200);
+  };
+  // При напускане на групата с фокус (Tab навън) затваряме веднага.
+  const onBlurGroup = (id: string) => (e: React.FocusEvent<HTMLLIElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setOpenId((cur) => (cur === id ? null : cur));
+    }
+  };
+
   const staticLinks = TOP_STATIC_HREFS.map((href) =>
     COMPANY_LINKS.find((l) => l.href === href)
   ).filter((l): l is NonNullable<typeof l> => Boolean(l));
 
+  const panelWrap = (id: string) =>
+    `transition-all duration-300 ease-[var(--ease-premium)] ${
+      openId === id
+        ? "visible translate-y-0 opacity-100 pointer-events-auto"
+        : "invisible translate-y-1 opacity-0 pointer-events-none"
+    }`;
+
   return (
-    <nav aria-label="Основна навигация" className="hidden lg:block">
-      <ul className="flex items-center gap-0.5 xl:gap-1">
-        {NAV_GROUPS.map((group) => (
-          <li key={group.id} className="group">
-            <Link href={group.href} className={linkCls}>
-              <GroupIcon id={group.id} className="h-4 w-4 text-primary" />
-              {group.label}
-              <ChevronIcon className="h-2.5 w-2.5 rotate-90 opacity-50" />
-            </Link>
-
-            <div
-              className="invisible absolute inset-x-0 top-full translate-y-1 opacity-0 pointer-events-none transition-all duration-300 ease-[var(--ease-premium)] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:pointer-events-auto"
+    <nav aria-label="Основна навигация" className="hidden self-stretch xl:block">
+      <ul className="flex h-full items-stretch gap-0">
+        {NAV_GROUPS.map((group) => {
+          const isOpen = openId === group.id;
+          return (
+            <li
+              key={group.id}
+              onMouseEnter={() => open(group.id)}
+              onMouseLeave={scheduleClose}
+              onFocus={() => open(group.id)}
+              onBlur={onBlurGroup(group.id)}
             >
-              <div className="border-t-2 border-primary bg-white shadow-premium rounded-b-2xl">
-                <div className="mx-auto max-w-[1140px] px-4">
-                  <div className="grid grid-cols-[280px_1fr] gap-10 py-8">
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card">
-                      <Image
-                        src={group.image}
-                        alt={group.imageAlt}
-                        fill
-                        sizes="280px"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent p-4 pt-10">
-                        <p className="font-sans text-sm font-semibold leading-snug text-white">
-                          {group.tagline}
-                        </p>
-                      </div>
-                    </div>
+              <Link
+                href={group.href}
+                aria-expanded={isOpen}
+                className={`${linkCls} ${isOpen ? "text-white" : ""}`}
+              >
+                {group.label}
+                <ChevronIcon
+                  className={`h-2.5 w-2.5 rotate-90 opacity-50 transition-transform duration-300 ${
+                    isOpen ? "-rotate-90 opacity-90" : ""
+                  }`}
+                />
+              </Link>
 
-                    <div>
-                      <div className="mb-4 flex items-center gap-2 border-b border-black/5 pb-3">
-                        <GroupIcon id={group.id} className="h-5 w-5 text-primary" />
+              <div className={`absolute inset-x-0 top-full ${panelWrap(group.id)}`}>
+                {/* невидим bridge — курсорът минава от тригера към панела без прекъсване */}
+                <div className="pt-2">
+                  <div className="border-t-2 border-primary bg-white shadow-premium rounded-b-2xl">
+                    <div className="mx-auto max-w-[1280px] px-4">
+                      <div className="grid grid-cols-[220px_1fr] gap-8 py-6">
                         <Link
                           href={group.href}
-                          className="font-sans text-lg font-bold text-ink hover:text-primary transition-colors"
+                          className="group/vis relative block aspect-[5/4] overflow-hidden rounded-xl shadow-card"
                         >
-                          {group.label}
+                          <Image
+                            src={group.image}
+                            alt={group.imageAlt}
+                            fill
+                            sizes="220px"
+                            className="object-cover transition-transform duration-500 group-hover/vis:scale-105"
+                          />
+                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent p-3 pt-8">
+                            <p className="font-sans text-[13px] font-semibold leading-snug text-white">
+                              {group.tagline}
+                            </p>
+                          </div>
                         </Link>
-                      </div>
-                      <ul className="grid grid-cols-2 gap-x-8 gap-y-0.5">
-                        {group.items.map((item) => (
-                          <li key={item.href}>
+
+                        <div className="flex flex-col">
+                          <div className="mb-3 flex items-center justify-between gap-2 border-b border-black/5 pb-2.5">
                             <Link
-                              href={item.href}
-                              className="group/link flex items-center gap-1.5 py-1.5 text-[14px] text-secondary hover:text-primary transition-colors"
+                              href={group.href}
+                              className="flex items-center gap-2 font-sans text-base font-bold text-ink hover:text-primary transition-colors"
                             >
-                              <ChevronIcon className="h-3.5 w-3.5 shrink-0 -translate-x-1 opacity-0 transition-all duration-200 group-hover/link:translate-x-0 group-hover/link:opacity-100" />
-                              {item.label}
+                              <GroupIcon id={group.id} className="h-5 w-5 text-primary" />
+                              {group.label}
                             </Link>
-                          </li>
-                        ))}
-                      </ul>
+                            <Link
+                              href={group.href}
+                              className="hidden xl:inline-flex items-center gap-1 whitespace-nowrap font-sans text-xs font-semibold text-primary hover:text-accent transition-colors"
+                            >
+                              Всички услуги
+                              <ChevronIcon className="h-3 w-3" />
+                            </Link>
+                          </div>
+
+                          <ul className="grid grid-cols-2 gap-x-6 gap-y-0.5">
+                            {group.items.map((item) => (
+                              <li key={item.href}>
+                                <Link
+                                  href={item.href}
+                                  onClick={() => setOpenId(null)}
+                                  className="group/link flex items-center gap-1.5 rounded py-1.5 text-[13.5px] text-secondary hover:text-primary transition-colors"
+                                >
+                                  <ChevronIcon className="h-3.5 w-3.5 shrink-0 -translate-x-1 text-primary opacity-0 transition-all duration-200 group-hover/link:translate-x-0 group-hover/link:opacity-100" />
+                                  <span className="-ml-4 group-hover/link:ml-0 transition-all duration-200">
+                                    {item.label}
+                                  </span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* Конверсионна лента — запълва празното при малки групи */}
+                          <div className="mt-auto flex items-center justify-between gap-4 rounded-xl bg-soft px-4 py-3">
+                            <p className="font-sans text-[13px] leading-snug text-secondary">
+                              <span className="font-semibold text-ink">
+                                Безплатен оглед
+                              </span>{" "}
+                              и оферта до 1 час в работно време.
+                            </p>
+                            <a
+                              href={`tel:+359${SITE.phone.slice(1)}`}
+                              data-ga-event="tel_click"
+                              onClick={() => setOpenId(null)}
+                              className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg bg-red-gradient px-3.5 py-2 font-sans text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                            >
+                              <PhoneGlyph className="h-4 w-4" />
+                              {SITE.phoneDisplay}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
 
         {staticLinks.map((link) =>
           link.href === "/blog/" ? (
-            <li key={link.href} className="group relative">
-              <Link href={link.href} className={linkCls}>
+            <li
+              key={link.href}
+              className="relative"
+              onMouseEnter={() => open("blog")}
+              onMouseLeave={scheduleClose}
+              onFocus={() => open("blog")}
+              onBlur={onBlurGroup("blog")}
+            >
+              <Link
+                href={link.href}
+                aria-expanded={openId === "blog"}
+                className={`${linkCls} ${openId === "blog" ? "text-white" : ""}`}
+              >
                 {link.label}
-                <ChevronIcon className="h-2.5 w-2.5 rotate-90 opacity-50" />
+                <ChevronIcon
+                  className={`h-2.5 w-2.5 rotate-90 opacity-50 transition-transform duration-300 ${
+                    openId === "blog" ? "-rotate-90 opacity-90" : ""
+                  }`}
+                />
               </Link>
-              <div className="invisible absolute right-0 top-full w-80 translate-y-1 opacity-0 pointer-events-none transition-all duration-300 ease-[var(--ease-premium)] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
-                <div className="rounded-2xl border-t-2 border-primary bg-white p-4 shadow-premium">
-                  <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-wide text-secondary/70">
-                    Полезни статии
-                  </p>
-                  <ul className="space-y-0.5">
-                    {FEATURED_ARTICLES.map((article) => (
-                      <li key={article.href}>
-                        <Link
-                          href={article.href}
-                          className="group/link flex items-start gap-1.5 py-1 text-[13.5px] leading-snug text-ink hover:text-primary transition-colors"
-                        >
-                          <ChevronIcon className="mt-0.5 h-3 w-3 shrink-0 -translate-x-1 opacity-0 transition-all duration-200 group-hover/link:translate-x-0 group-hover/link:opacity-100" />
-                          {article.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+              <div className={`absolute right-0 top-full w-80 ${panelWrap("blog")}`}>
+                <div className="pt-2">
+                  <div className="rounded-2xl border-t-2 border-primary bg-white p-4 shadow-premium">
+                    <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-wide text-secondary/70">
+                      Полезни статии
+                    </p>
+                    <ul className="space-y-0.5">
+                      {FEATURED_ARTICLES.map((article) => (
+                        <li key={article.href}>
+                          <Link
+                            href={article.href}
+                            onClick={() => setOpenId(null)}
+                            className="group/link flex items-start gap-1.5 rounded py-1 text-[13.5px] leading-snug text-ink hover:text-primary transition-colors"
+                          >
+                            <ChevronIcon className="mt-0.5 h-3 w-3 shrink-0 text-primary" />
+                            {article.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href="/blog/"
+                      onClick={() => setOpenId(null)}
+                      className="mt-3 inline-flex items-center gap-1 font-sans text-sm font-semibold text-primary hover:text-accent transition-colors"
+                    >
+                      Всички статии
+                      <ChevronIcon className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </li>
@@ -126,6 +255,14 @@ export function MegaMenu() {
         )}
       </ul>
     </nav>
+  );
+}
+
+function PhoneGlyph({ className }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+      <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z" />
+    </svg>
   );
 }
 

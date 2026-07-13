@@ -55,12 +55,17 @@ export function Footer() {
               gaEvent="viber_click"
             />
             <SocialLink
-              href="https://www.facebook.com/silvia.bencheva"
+              href={SITE.social.facebook}
               src="/brand/social/facebook.svg"
               label="Facebook"
             />
             <SocialLink
-              href={SITE.googleMapsUrl}
+              href={SITE.social.instagram}
+              src="/brand/social/instagram.svg"
+              label="Instagram"
+            />
+            <SocialLink
+              href={SITE.social.google}
               src="/brand/social/google-g.svg"
               label="Отзиви в Google"
             />
