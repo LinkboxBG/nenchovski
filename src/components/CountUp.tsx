@@ -7,17 +7,30 @@ interface CountUpProps {
   suffix?: string;
   duration?: number;
   className?: string;
+  /** Групиране на хилядите с тънък интервал (3838 → „3 838"). SSR-безопасно. */
+  group?: boolean;
 }
 
 function easeOutCubic(t: number): number {
   return 1 - Math.pow(1 - t, 3);
 }
 
+/** Детерминирано групиране на хилядите (еднакво на сървър и клиент). */
+function groupThousands(n: number): string {
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
 /**
  * Брояч с анимация 0→value при първо влизане в изгледа.
  * SSR/no-JS рендира директно крайната стойност (коректно за SEO).
  */
-export function CountUp({ value, suffix = "", duration = 1200, className }: CountUpProps) {
+export function CountUp({
+  value,
+  suffix = "",
+  duration = 1200,
+  className,
+  group = false,
+}: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(value);
   const hasAnimated = useRef(false);
@@ -62,7 +75,7 @@ export function CountUp({ value, suffix = "", duration = 1200, className }: Coun
 
   return (
     <span ref={ref} className={className}>
-      {display}
+      {group ? groupThousands(display) : display}
       {suffix ? <span className="text-primary">{suffix}</span> : null}
     </span>
   );

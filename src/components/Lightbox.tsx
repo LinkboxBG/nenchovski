@@ -11,13 +11,16 @@ interface GalleryImage {
 
 interface LightboxProps {
   images: GalleryImage[];
+  /** „cover" (снимки, реже) или „contain" (документи-референции, без рязане). */
+  fit?: "cover" | "contain";
 }
 
 const MAX_TILES = 9;
 const SWIPE_THRESHOLD = 40;
 
 /** Клиентска решетка + <dialog> преглед на пълен размер, без външни библиотеки. */
-export function Lightbox({ images }: LightboxProps) {
+export function Lightbox({ images, fit = "cover" }: LightboxProps) {
+  const contain = fit === "contain";
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
@@ -84,9 +87,9 @@ export function Lightbox({ images }: LightboxProps) {
               type="button"
               onClick={() => open(i)}
               className={`group relative overflow-hidden rounded-xl ${
-                i === 0 ? "col-span-2 row-span-1 md:row-span-2" : ""
-              }`}
-              aria-label={`Отвори снимка ${i + 1}: ${img.alt}`}
+                contain ? "border border-black/10 bg-white" : ""
+              } ${i === 0 && !contain ? "col-span-2 row-span-1 md:row-span-2" : ""}`}
+              aria-label={`Отвори ${contain ? "документ" : "снимка"} ${i + 1}: ${img.alt}`}
             >
               <Image
                 src={img.src}
@@ -94,11 +97,15 @@ export function Lightbox({ images }: LightboxProps) {
                 fill
                 loading="lazy"
                 sizes={
-                  i === 0
+                  i === 0 && !contain
                     ? "(min-width: 768px) 50vw, 100vw"
                     : "(min-width: 768px) 25vw, 50vw"
                 }
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className={`transition-transform duration-500 ${
+                  contain
+                    ? "object-contain p-2.5"
+                    : "object-cover group-hover:scale-[1.03]"
+                }`}
               />
               {isOverflowTile ? (
                 <span className="absolute inset-0 flex items-center justify-center bg-black/60 font-sans text-lg font-semibold text-white">

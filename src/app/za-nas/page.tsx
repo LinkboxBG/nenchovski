@@ -6,9 +6,15 @@ import { aboutPageSchema } from "@/lib/schema";
 import { Hero } from "@/components/Hero";
 import { AuthorityStrip } from "@/components/AuthorityStrip";
 import { ReviewsSection } from "@/components/ReviewsSection";
+import { Lightbox } from "@/components/Lightbox";
+import {
+  StateInstitutions,
+  IpaCaseStudy,
+  ClientCaseStudies,
+} from "@/components/PortfolioSections";
 import { Breadcrumbs, CtaBanner } from "@/components/Sections";
 import { SITE } from "@/data/site";
-import { CORPORATE_CLIENTS } from "@/data/clients";
+import { ZA_NAS_STATS, REFERENCES, WORK_PHOTOS } from "@/data/portfolio";
 
 export const metadata: Metadata = {
   title: "За нас — Хамали Ненчовски | 18 години опит в София",
@@ -61,7 +67,9 @@ export default function ZaNasPage() {
               Аз съм <strong>Георги Ненчовски</strong>. През 2008 г. започнах с
               един бус и много желание — днес, 18 години по-късно,{" "}
               <strong>Хамали Ненчовски</strong> е семейна фирма, която е
-              преместила хиляди домове и офиси в София и цялата страна.
+              преместила хиляди домове и офиси в София и цялата страна. Днес сме
+              доверен партньор на държавни институции, утвърдени компании и
+              стотици физически лица.
             </p>
             <p>
               През всичките тези години правилото ни е едно и също: отнасяме се с
@@ -139,6 +147,9 @@ export default function ZaNasPage() {
         </div>
       </section>
 
+      {/* Статистики — собствените числа на клиента (4) */}
+      <AuthorityStrip variant="stats" items={ZA_NAS_STATS} />
+
       {/* Екип */}
       <section aria-labelledby="team-h" className="bg-soft">
         <div className="mx-auto max-w-[1140px] px-4 py-14 md:py-20">
@@ -174,39 +185,63 @@ export default function ZaNasPage() {
         </div>
       </section>
 
-      {/* Портфолио / институции */}
+      {/* Портфолио: държавни институции */}
+      <StateInstitutions />
+
+      {/* Казус: Институт по публична администрация */}
+      <IpaCaseStudy />
+
+      {/* Лого-лента: банки и институции */}
       <AuthorityStrip variant="corporate" />
-      <section aria-labelledby="clients-h" className="bg-paper">
+
+      {/* Бизнес казуси + реални отзиви */}
+      <ClientCaseStudies />
+
+      {/* Референции — сканирани препоръчителни писма */}
+      <section aria-labelledby="ref-h" className="bg-soft">
         <div className="mx-auto max-w-[1140px] px-4 py-14 md:py-20">
-          <h2 id="clients-h" data-reveal className="text-2xl md:text-3xl">
-            Институции и компании, които ни се довериха
+          <span className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+            Доказателства
+          </span>
+          <h2 id="ref-h" data-reveal className="mt-2 text-2xl md:text-3xl">
+            Референции от клиенти
           </h2>
           <div className="mt-2 h-1 w-12 rounded-full bg-red-gradient" aria-hidden />
-          <ul
-            data-reveal-stagger
-            className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+          <p
+            data-reveal
+            className="mt-5 max-w-2xl text-[15px] leading-relaxed text-secondary"
           >
-            {CORPORATE_CLIENTS.map((client) => (
-              <li
-                key={client.name}
-                data-reveal
-                className="rounded-xl border border-black/10 bg-soft px-4 py-3.5"
-              >
-                <span className="block font-sans font-medium text-ink">
-                  {client.name}
-                </span>
-                {client.since ? (
-                  <span className="mt-0.5 block text-sm text-secondary">
-                    {client.since}
-                  </span>
-                ) : null}
-              </li>
-            ))}
-          </ul>
+            Сканирани препоръчителни писма от банки, институции и фирми, за които
+            сме работили през годините.
+          </p>
+          <div data-reveal className="mt-10">
+            <Lightbox images={REFERENCES} fit="contain" />
+          </div>
         </div>
       </section>
 
-      <AuthorityStrip variant="stats" />
+      {/* Наши обекти — реални снимки */}
+      <section aria-labelledby="work-h" className="bg-paper">
+        <div className="mx-auto max-w-[1140px] px-4 py-14 md:py-20">
+          <span className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+            Реална работа
+          </span>
+          <h2 id="work-h" data-reveal className="mt-2 text-2xl md:text-3xl">
+            Наши обекти — реални снимки
+          </h2>
+          <div className="mt-2 h-1 w-12 rounded-full bg-red-gradient" aria-hidden />
+          <p
+            data-reveal
+            className="mt-5 max-w-2xl text-[15px] leading-relaxed text-secondary"
+          >
+            Част от преместванията, изнасянията и монтажите, които екипът ни е
+            изпълнил в София и страната.
+          </p>
+          <div data-reveal className="mt-10">
+            <Lightbox images={WORK_PHOTOS} />
+          </div>
+        </div>
+      </section>
 
       {/* Ревюта */}
       <section className="bg-soft">

@@ -72,14 +72,15 @@ export const CORPORATE_CLIENTS: CorporateClient[] = [
     url: "https://www.ipa.government.bg",
   },
   {
-    name: "Гопет Транс",
-    shortName: "Гопет",
-    logo: "/brand/clients/gopet.webp",
+    name: "Гопет Логистикс ЕООД",
+    shortName: "Гопет Логистикс",
+    logo: "/brand/clients/gopet-logistics.webp",
     sector: "business",
   },
   {
-    name: "Диджипол",
-    logo: "/brand/clients/digipol.webp",
+    name: "Диджитол Смарт Инфраструктура АД",
+    shortName: "Диджитол Смарт",
+    logo: "/brand/clients/digitoll.webp",
     sector: "business",
   },
 ];
