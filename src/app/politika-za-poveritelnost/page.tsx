@@ -127,12 +127,12 @@ export default function PoveritelnostPage() {
             подаване на жалба до Комисията за защита на личните данни (КЗЛД)
             —{" "}
             <a
-              href="https://www.kzld.bg"
+              href="https://cpdp.bg/"
               target="_blank"
               rel="noopener noreferrer"
               className="underline"
             >
-              kzld.bg
+              cpdp.bg
             </a>
             .
           </li>
