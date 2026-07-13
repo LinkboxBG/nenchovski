@@ -11,7 +11,7 @@ interface GalleryProps {
 }
 
 /** Server wrapper: подава снимките на клиентския Lightbox (решетка + preview). */
-export function Gallery({ images, title = "Наши обекти — реални снимки" }: GalleryProps) {
+export function Gallery({ images, title = "От нашата работа" }: GalleryProps) {
   if (!images?.length) return null;
 
   return (

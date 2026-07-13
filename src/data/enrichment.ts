@@ -90,6 +90,12 @@ export interface PageEnrichment {
    */
   beforeAfter?: { before: GalleryImage; after: GalleryImage }[];
   gallery?: GalleryImage[];
+  /**
+   * Заглавие на галерийната секция. Липсва → Gallery default „От нашата работа".
+   * Override само където кадрите не са „от нашата работа" (напр. preporachai =
+   * ревю-скрийншоти → „Мнения от клиенти").
+   */
+  galleryTitle?: string;
   relatedArticles?: ArticleSlug[];
   formVariant?: FormVariant;
 }

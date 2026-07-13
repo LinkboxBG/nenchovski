@@ -1,4 +1,5 @@
 import type { PageEnrichment, ServiceSlug } from "../enrichment";
+import { TRANSPORT_GALLERY } from "../galleries";
 
 /** Групи „Транспорт" + utility страници — попълва се от Фаза 3 работник T. */
 export const TRANSPORT_ENRICHMENT: Partial<
@@ -16,28 +17,7 @@ export const TRANSPORT_ENRICHMENT: Partial<
     // B2B hero (лого marquee в херото); stats лентата няма лога → няма конфликт.
     heroVariant: "b2b",
     authority: "stats",
-    gallery: [
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D0%91%D1%83%D1%81-%D0%BF%D0%BE%D0%B4-%D0%BD%D0%B0%D0%B5%D0%BC.01-rmfyal0ew4pt51kober0zkr8auly606m1htm9bx964.webp",
-        alt: "Товарен бус под наем с брандиране на Хамали Ненчовски",
-      },
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D0%91%D1%83%D1%81-%D0%BF%D0%BE%D0%B4-%D0%BD%D0%B0%D0%B5%D0%BC.05-rmfygbslozld4zbpfg6cw4wgm6ge2ya77md86ewot4.webp",
-        alt: "Товарен бус със спусната рампа — бус под наем",
-      },
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D0%91%D1%83%D1%81-%D0%BF%D0%BE%D0%B4-%D0%BD%D0%B0%D0%B5%D0%BC.06-rmfyh2430cle629h5rjwty9d8yuo2h6on8mtm5tnyw.webp",
-        alt: "Брандиран бус на Ненчовски по време на курс",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.01.webp",
-        alt: "Разтоварване с колесар от бус под наем",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.08.webp",
-        alt: "Хамалски екип товари офис обзавеждане на количка",
-      },
-    ],
+    gallery: TRANSPORT_GALLERY,
     formVariant: "moving",
   },
 
@@ -49,20 +29,7 @@ export const TRANSPORT_ENRICHMENT: Partial<
       badges: ["От 2008 г. — 18 години опит", "Оферта до 1 час"],
     },
     authority: "corporate",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2023/12/%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D1%80%D1%83%D0%BC%D1%8A%D0%BD%D0%B8%D1%8F-%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F-%D1%81%D0%BD%D0%B8%D0%BC%D0%BA%D0%B0-3.webp",
-        alt: "Транспорт Румъния — България, обезопасен товар",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.17.webp",
-        alt: "Хамалски екип товари бус преди международен курс",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.05.webp",
-        alt: "Опаковани кашони за международно преместване",
-      },
-    ],
+    gallery: TRANSPORT_GALLERY,
     relatedArticles: [
       "podgotovka-za-premestvane-na-doma",
       "kashoni-i-opakovachna-hartiq",
@@ -79,16 +46,7 @@ export const TRANSPORT_ENRICHMENT: Partial<
       badges: ["От 2008 г. — 18 години опит"],
     },
     authority: "stats",
-    gallery: [
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D0%BE%D1%82-%D0%B3%D1%8A%D1%80%D1%86%D0%B8%D1%8F-%D0%B4%D0%BE-%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F-%D1%81%D0%BD%D0%B8%D0%BC%D0%BA%D0%B0-4-2-rmc37kdzhglybdsa7vajtnwsubix8qhxwrzglkemrc.jpg",
-        alt: "Опаковани кашони преди транспорт от Гърция до България",
-      },
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D0%BE%D1%82-%D0%B3%D1%8A%D1%80%D1%86%D0%B8%D1%8F-%D0%B4%D0%BE-%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F-%D1%81%D0%BD%D0%B8%D0%BC%D0%BA%D0%B0-5-2-rmc37kdzhglybdsa7vajtnwsubix8qhxwrzglkemrc.jpg",
-        alt: "Стая с опаковани вещи преди международен транспорт",
-      },
-    ],
+    gallery: TRANSPORT_GALLERY,
     relatedArticles: [
       "podgotovka-za-premestvane-na-doma",
       "kashoni-i-opakovachna-hartiq",
@@ -106,16 +64,7 @@ export const TRANSPORT_ENRICHMENT: Partial<
       badges: ["От 2008 г. — 18 години опит"],
     },
     authority: "stats",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2023/12/%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D1%80%D1%83%D0%BC%D1%8A%D0%BD%D0%B8%D1%8F-%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F-%D1%81%D0%BD%D0%B8%D0%BC%D0%BA%D0%B0-3.webp",
-        alt: "Транспорт Румъния — България, обезопасен товар",
-      },
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-3-rmc37cv9ysbdi7f29qpb05w3wbbvw7ohx00nqvgamc.jpg",
-        alt: "Обезопасяване на мебели със стреч фолио преди транспорт",
-      },
-    ],
+    gallery: TRANSPORT_GALLERY,
     relatedArticles: [
       "podgotovka-za-premestvane-na-doma",
       "kashoni-i-opakovachna-hartiq",
@@ -147,6 +96,8 @@ export const TRANSPORT_ENRICHMENT: Partial<
       ],
     },
     authority: "corporate",
+    // Галерията тук са ревю-скрийншоти, не „наши обекти" → собствено заглавие.
+    galleryTitle: "Мнения от клиенти",
     gallery: [
       {
         src: "/wp-content/uploads/2026/04/%D0%9C%D0%B8%D0%BB%D0%B5%D0%BD%D0%BE-%D0%A8%D0%BE%D0%BF%D0%BE%D0%B2%D0%B0-%D0%BC%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5.webp",

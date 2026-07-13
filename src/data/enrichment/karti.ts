@@ -1,4 +1,5 @@
 import type { PageEnrichment, ServiceSlug } from "../enrichment";
+import { KURTI_GALLERY } from "../galleries";
 
 /** Групи „Кърти·Чисти·Извозва" + „Почистване" — попълва се от Фаза 3 работник K. */
 export const KARTI_ENRICHMENT: Partial<
@@ -17,32 +18,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.03.webp",
-        alt: "Къртене на стена по време на комплексна услуга кърти чисти извозва",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.07.webp",
-        alt: "Натрошени строителни отпадъци след къртене",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.06.webp",
-        alt: "Ремонтна дейност на обект — кърти чисти извозва",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.08.webp",
-        alt: "Къртене на тухлена стена с перфоратор и защитна екипировка",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.09.webp",
-        alt: "Премахване на стенни плочки с чук и лост",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%98%D0%B7%D1%85%D0%B2%D1%8A%D1%80%D0%BB%D1%8F%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D0%B0%D1%80%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.11.webp",
-        alt: "Разчистени стари мебели, готови за извозване",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "smyana-na-vrati-bez-kurtene",
       "kak-da-izberete-firma-za-hamalski-uslugi",
@@ -64,32 +40,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B5%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B1%D0%B0%D0%BD%D1%8F.07.webp",
-        alt: "Баня преди къртене и ремонт",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.09.webp",
-        alt: "Премахване на плочки от стена в баня",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.03.webp",
-        alt: "Къртене на замазка и основа в баня",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.08.webp",
-        alt: "Работник разбива тухлена стена с перфоратор при ремонт на баня",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.07.webp",
-        alt: "Отломки от плочки и замазка след къртене на баня",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B5%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D0%B5%D0%BD%D0%B8.05.webp",
-        alt: "Разчистване на отпадъци след къртене на баня",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "smyana-na-vrati-bez-kurtene",
       "kak-da-izberete-firma-za-hamalski-uslugi",
@@ -110,20 +61,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.08.webp",
-        alt: "Работник разбива бетонна конструкция с перфоратор",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B5%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B1%D0%B5%D1%82%D0%BE%D0%BD-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.05.webp",
-        alt: "Почистване на отломки след къртене на бетон",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.07.webp",
-        alt: "Натрошен бетон, готов за извозване",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "smyana-na-vrati-bez-kurtene",
       "kak-da-izberete-firma-za-hamalski-uslugi",
@@ -144,20 +82,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.03.webp",
-        alt: "Къртене на стена с перфоратор",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B5%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D0%B5%D0%BD%D0%B8.05.webp",
-        alt: "Разчистване на отломки след къртене на стена",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.08.webp",
-        alt: "Разбиване на тухлена стена с перфоратор",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "smyana-na-vrati-bez-kurtene",
       "kak-da-izberete-firma-za-hamalski-uslugi",
@@ -178,28 +103,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%98%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D0%BD%D0%B8-%D0%BE%D1%82%D0%BF%D0%B0%D0%B4%D1%8A%D1%86%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.03.webp",
-        alt: "Струпани строителни отпадъци, готови за извозване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%98%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D0%BD%D0%B8-%D0%BE%D1%82%D0%BF%D0%B0%D0%B4%D1%8A%D1%86%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.04.webp",
-        alt: "Сортиране на отпадъци за рециклиране",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9A%D1%8A%D1%80%D1%82%D0%B8-%D1%87%D0%B8%D1%81%D1%82%D0%B8-%D0%B8%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0.03.webp",
-        alt: "Къртене преди извозване на строителни отпадъци",
-      },
-      {
-        src: "/wp-content/uploads/2023/12/%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D1%80%D1%83%D0%BC%D1%8A%D0%BD%D0%B8%D1%8F-%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F-%D1%81%D0%BD%D0%B8%D0%BC%D0%BA%D0%B0-3.webp",
-        alt: "Товарене на отпадъци в камион за извозване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%98%D0%B7%D0%B2%D0%BE%D0%B7%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D0%BD%D0%B8-%D0%BE%D1%82%D0%BF%D0%B0%D0%B4%D1%8A%D1%86%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.07.webp",
-        alt: "Обект в процес на разчистване след къртене",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "kak-da-izberete-firma-za-hamalski-uslugi",
       "kolko-struvat-hamalskite-uslugi-v-sofia",
@@ -220,32 +124,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%98%D0%B7%D1%85%D0%B2%D1%8A%D1%80%D0%BB%D1%8F%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D0%B0%D1%80%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.09.webp",
-        alt: "Оглед на стари мебели преди извозване",
-      },
-      {
-        src: "/wp-content/uploads/2023/09/%D0%A0%D0%B0%D0%B7%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%B8-%D1%81%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-3.jpg",
-        alt: "Демонтаж на стар стол преди извозване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D0%BE%D1%87%D0%B8%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B0%D0%B2%D0%B0%D0%BD%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.03.webp",
-        alt: "Стара износена мебел, готова за извозване",
-      },
-      {
-        src: "/wp-content/uploads/2023/09/%D0%A0%D0%B0%D0%B7%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%B8-%D1%81%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-2.jpg",
-        alt: "Разглобяване на мебели преди извозване",
-      },
-      {
-        src: "/wp-content/uploads/2023/09/%D0%A0%D0%B0%D0%B7%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%B8-%D1%81%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-1.jpg",
-        alt: "Демонтаж на мебел с инструменти преди извозване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.04.webp",
-        alt: "Извозване на стари мебели с камион",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "premestvane-na-tezhki-mebeli",
       "razglobyavane-i-sglobyavane-na-mebeli",
@@ -267,16 +146,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%98%D0%B7%D1%85%D0%B2%D1%8A%D1%80%D0%BB%D1%8F%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D0%B0%D1%80%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.11.webp",
-        alt: "Разчистени стари вещи от мазе",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%98%D0%B7%D1%85%D0%B2%D1%8A%D1%80%D0%BB%D1%8F%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%81%D1%82%D0%B0%D1%80%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.09.webp",
-        alt: "Стари вещи и мебели, събрани в мазе преди почистване",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "suveti-za-podrejdane-doma",
       "kak-da-izberete-firma-za-hamalski-uslugi",
@@ -297,20 +167,7 @@ export const KARTI_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D0%BE%D1%87%D0%B8%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B0%D0%B2%D0%B0%D0%BD%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.03.webp",
-        alt: "Стара износена мебел, намерена на тавана",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D0%BE%D1%87%D0%B8%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B0%D0%B7%D0%B5%D1%82%D0%B0-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.03.webp",
-        alt: "Стари вещи, събрани на тавана за извозване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D0%BE%D1%87%D0%B8%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B0%D0%B2%D0%B0%D0%BD%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.06.webp",
-        alt: "Пръскане с ароматизатор след почистване на таван",
-      },
-    ],
+    gallery: KURTI_GALLERY,
     relatedArticles: [
       "suveti-za-podrejdane-doma",
       "kak-da-izberete-firma-za-hamalski-uslugi",

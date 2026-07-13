@@ -1,4 +1,9 @@
 import type { PageEnrichment, ServiceSlug } from "../enrichment";
+import {
+  PREMESTVANE_GALLERY,
+  OFISI_GALLERY,
+  HEAVY_GALLERY,
+} from "../galleries";
 
 /** Група „Преместване" — попълва се от Фаза 3 работник P. */
 export const PREMESTVANE_ENRICHMENT: Partial<
@@ -20,28 +25,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B0.03.webp",
-        alt: "Опаковани столове преди преместване на дома",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B0.05.webp",
-        alt: "Опаковани мебели преди преместване на дома",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B0.06.webp",
-        alt: "Товарене на кашони в камион при зимно преместване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.10.webp",
-        alt: "Товарен бус на Ненчовски, готов за качване на мебели",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B0.09.webp",
-        alt: "Брандиран камион на Ненчовски по време на превоз при зимно преместване",
-      },
-    ],
+    gallery: PREMESTVANE_GALLERY,
     relatedArticles: [
       "podgotovka-za-premestvane-na-doma",
       "premestvane-na-doma-s-kotka",
@@ -63,20 +47,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B0%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BC%D0%B5%D0%BD%D1%82.04.webp",
-        alt: "Пренасяне на диван покрай кухненски мебели при преместване на апартамент",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B0%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BC%D0%B5%D0%BD%D1%82.05.webp",
-        alt: "Опакован багаж, готов за преместване на апартамент",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B1%D0%B0%D0%B3%D0%B0%D0%B6.03.webp",
-        alt: "Опаковане на куфар със стреч фолио преди преместване на апартамент",
-      },
-    ],
+    gallery: PREMESTVANE_GALLERY,
     relatedArticles: [
       "podgotovka-za-premestvane-na-doma",
       "kachvane-na-mebeli-po-stulbi",
@@ -98,24 +69,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BA%D1%8A%D1%89%D0%B8.05.webp",
-        alt: "Фолиране и обезопасяване на мебели при преместване на къща",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BA%D1%8A%D1%89%D0%B8.06.webp",
-        alt: "Брандиран камион на Ненчовски по време на превоз при преместване на къща",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BA%D1%8A%D1%89%D0%B8.07.webp",
-        alt: "Опаковани кашони и мебели, готови за извозване от къщата",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BA%D1%8A%D1%89%D0%B8.08.webp",
-        alt: "Товарен камион на Ненчовски, паркиран на обект",
-      },
-    ],
+    gallery: PREMESTVANE_GALLERY,
     relatedArticles: [
       "kakvo-se-nosi-v-nova-kashta",
       "podgotovka-za-premestvane-na-doma",
@@ -140,32 +94,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
     // (иначе двойна лого стена).
     heroVariant: "b2b",
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.08.webp",
-        alt: "Хамали пренасят офис шкаф на количка",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BE%D1%84%D0%B8%D1%81%D0%B8.04.webp",
-        alt: "Екип на Ненчовски пренася офис оборудване с колесар",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BE%D1%84%D0%B8%D1%81%D0%B8.06.webp",
-        alt: "Офис помещение, подготвено за преместване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BE%D1%84%D0%B8%D1%81%D0%B8.07.webp",
-        alt: "Офис пространство с климатик и мебели преди преместване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BE%D1%84%D0%B8%D1%81%D0%B8.08.webp",
-        alt: "Офис шкафове, готови за преместване",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BE%D1%84%D0%B8%D1%81%D0%B8.09.webp",
-        alt: "Офис мебели, натоварени в камион за преместване",
-      },
-    ],
+    gallery: OFISI_GALLERY,
     relatedArticles: [
       "kolko-struvat-hamalskite-uslugi-v-sofia",
       "kak-da-izberete-firma-za-hamalski-uslugi",
@@ -186,16 +115,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "corporate",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BA%D1%8A%D1%89%D0%B8.07.webp",
-        alt: "Опаковани кашони и багаж, готови за пренасяне",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B1%D0%B0%D0%B3%D0%B0%D0%B6.06.webp",
-        alt: "Товарен бус на Ненчовски, готов за пренасяне на багаж",
-      },
-    ],
+    gallery: PREMESTVANE_GALLERY,
     relatedArticles: [
       "razglobyavane-i-sglobyavane-na-mebeli",
       "podgotovka-za-premestvane-na-doma",
@@ -217,40 +137,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.01.webp",
-        alt: "Товарене на секция — преместване на мебели София",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%85%D0%BB%D0%B0%D0%B4%D0%B8%D0%BB%D0%BD%D0%B8%D0%BA.01.webp",
-        alt: "Хамали пренасят голяма бяла техника пред къща",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.03.webp",
-        alt: "Товарене на кашони в камион — преместване на мебели",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.05.webp",
-        alt: "Мебелни шкафове, подготвени за пренасяне",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.06.webp",
-        alt: "Товарен камион със спусната рампа, готов за мебели",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.07.webp",
-        alt: "Опаковани дивани, натоварени в камион",
-      },
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-7-1-rmc372j1vlx7yhu2y48eqqi1d2qujjjg7kubgtvmis.webp",
-        alt: "Хамали повдигат тежка мебел с транспортни ремъци",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8.09.webp",
-        alt: "Обезопасяване на мебели със стреч фолио",
-      },
-    ],
+    gallery: PREMESTVANE_GALLERY,
     relatedArticles: [
       "premestvane-na-tezhki-mebeli",
       "razglobyavane-i-sglobyavane-na-mebeli",
@@ -272,16 +159,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%B2%D0%BE%D0%B7-%D0%BD%D0%B0-%D0%B4%D0%B8%D0%B2%D0%B0%D0%BD.03.webp",
-        alt: "Диван, готов за транспортиране",
-      },
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-3-rmc37cv9ysbdi7f29qpb05w3wbbvw7ohx00nqvgamc.jpg",
-        alt: "Опаковане на диван със стреч фолио преди превоз",
-      },
-    ],
+    gallery: HEAVY_GALLERY,
     relatedArticles: [
       "podgotovka-za-premestvane-na-doma",
       "premestvane-na-doma-s-kotka",
@@ -303,20 +181,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%85%D0%BB%D0%B0%D0%B4%D0%B8%D0%BB%D0%BD%D0%B8%D0%BA.04.webp",
-        alt: "Отстраняване на защитно фолио от нова хладилна техника",
-      },
-      {
-        src: "/wp-content/uploads/elementor/thumbs/%D0%BF%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%B8-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-7-1-rmc372j1vlx7yhu2y48eqqi1d2qujjjg7kubgtvmis.webp",
-        alt: "Хамали повдигат хладилник с транспортни ремъци",
-      },
-      {
-        src: "/wp-content/uploads/2026/04/%D0%9F%D1%80%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D1%85%D0%BB%D0%B0%D0%B4%D0%B8%D0%BB%D0%BD%D0%B8%D0%BA.07.webp",
-        alt: "Транспортиране на хладилник в изправено положение",
-      },
-    ],
+    gallery: HEAVY_GALLERY,
     relatedArticles: [
       "podgotovka-za-premestvane-na-doma",
       "premestvane-na-doma-s-kotka",
@@ -338,12 +203,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "reviews",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2023/09/%D0%A0%D0%B0%D0%B7%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%B8-%D1%81%D0%B3%D0%BB%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-2.jpg",
-        alt: "Разглобяване на мебел от екип преди пренасяне",
-      },
-    ],
+    gallery: HEAVY_GALLERY,
     relatedArticles: [
       "premestvane-na-tezhki-mebeli",
       "kachvane-na-mebeli-po-stulbi",
@@ -365,12 +225,7 @@ export const PREMESTVANE_ENRICHMENT: Partial<
       ],
     },
     authority: "stats",
-    gallery: [
-      {
-        src: "/wp-content/uploads/2020/02/%D0%BA%D0%B0%D1%88%D0%BE%D0%BD%D0%B8-%D0%B8-%D0%BE%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8A%D1%87%D0%BD%D0%B0-%D1%85%D0%B0%D1%80%D1%82%D0%B8%D1%8F-%D1%82%D0%BE%D1%87%D0%BA%D0%B0-1.jpg",
-        alt: "Кашони и опаковъчна хартия за преместване — Хамали Ненчовски",
-      },
-    ],
+    gallery: PREMESTVANE_GALLERY,
     relatedArticles: [
       "kashoni-i-opakovachna-hartiq",
       "podgotovka-za-premestvane-na-doma",
