@@ -26,39 +26,68 @@ function CorporateBand({ className }: { className: string }) {
   });
 
   return (
-    <div className={`bg-carbon py-10 md:py-12 ${className}`}>
-      <div className="mx-auto max-w-[1140px] px-4">
-        <p
-          data-reveal
-          className="mb-8 text-center font-sans text-xs font-semibold uppercase tracking-wider text-white/60"
+    <section
+      className={`relative overflow-hidden bg-carbon py-14 md:py-16 ${className}`}
+    >
+      {/* Горна червена нишка + мек ореол за дълбочина */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-primary/[0.07] blur-3xl"
+      />
+
+      <div className="relative mx-auto max-w-[1140px] px-4">
+        <header className="mb-10 text-center" data-reveal>
+          <span className="mb-3 inline-flex items-center gap-2.5 font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+            <span aria-hidden className="h-px w-7 bg-gradient-to-r from-transparent to-primary" />
+            Нашите клиенти
+            <span aria-hidden className="h-px w-7 bg-gradient-to-l from-transparent to-primary" />
+          </span>
+          <p className="mx-auto max-w-2xl font-sans text-xl font-bold tracking-tight text-white sm:text-2xl">
+            Доверен партньор на институции и банки от 2008 г.
+          </p>
+        </header>
+
+        <ul
+          data-reveal-stagger
+          className="mx-auto grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4"
         >
-          Доверен партньор на институции и банки от 2008 г.
-        </p>
-        <div className="flex flex-wrap items-start justify-center gap-x-10 gap-y-6">
           {sorted.map((client) => (
-            <div key={client.name} className="flex flex-col items-center gap-1.5">
-              {client.logo ? (
-                <Image
-                  src={client.logo}
-                  alt={client.name}
-                  width={140}
-                  height={40}
-                  className="h-9 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100 md:h-10"
-                />
-              ) : (
-                <span className="inline-flex items-center rounded-lg border border-line px-3.5 py-2.5 font-sans text-sm font-medium text-white/70 transition-colors hover:text-white">
-                  {client.shortName ?? client.name}
-                </span>
-              )}
-              {client.since ? (
-                <span className="hidden font-sans text-[11px] text-white/40 lg:block">
-                  {client.since}
-                </span>
-              ) : null}
-            </div>
+            <li key={client.name} data-reveal>
+              <ClientTile client={client} />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
+    </section>
+  );
+}
+
+/** Едно клиентско лого/име върху чиста бяла плочка — чете се на всеки фон. */
+function ClientTile({ client }: { client: CorporateClient }) {
+  return (
+    <div className="group flex h-full flex-col items-center gap-2.5">
+      <div className="flex h-[74px] w-full items-center justify-center rounded-xl border border-white/10 bg-white px-5 shadow-[0_4px_14px_-6px_rgba(0,0,0,0.6)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-premium">
+        {client.logo ? (
+          <Image
+            src={client.logo}
+            alt={client.name}
+            width={160}
+            height={48}
+            className="max-h-10 w-auto max-w-full object-contain"
+          />
+        ) : (
+          <span className="text-center font-sans text-[15px] font-bold leading-tight tracking-tight text-carbon">
+            {client.shortName ?? client.name}
+          </span>
+        )}
+      </div>
+      <span className="font-sans text-[11px] font-semibold uppercase tracking-wide text-white/45 transition-colors group-hover:text-primary">
+        {client.since ?? " "}
+      </span>
     </div>
   );
 }
