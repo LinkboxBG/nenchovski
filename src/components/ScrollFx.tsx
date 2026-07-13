@@ -16,6 +16,14 @@ export function ScrollFx() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Скрол най-горе при смяна на страница. App Router вика scrollTo(0,0), но
+    // глобалният scroll-behavior:smooth (globals.css) го анимира и [data-reveal]
+    // височинните промени го прекъсват мид-страница. behavior:"instant" бие CSS-а.
+    // Пропускаме, ако URL има #котва → оставяме котвената навигация (напр. #ceni).
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+
     // Стъпка 1: разпредели --reveal-delay на децата на [data-reveal-stagger].
     const staggerParents = document.querySelectorAll<HTMLElement>(STAGGER_SELECTOR);
     staggerParents.forEach((parent) => {
