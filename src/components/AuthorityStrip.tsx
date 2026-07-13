@@ -195,7 +195,7 @@ function StatsBand({ className }: { className: string }) {
       <div className="mx-auto max-w-[1140px] px-4">
         <div
           data-reveal-stagger
-          className="grid grid-cols-2 gap-y-8 md:grid-cols-4 md:gap-y-0"
+          className="grid grid-cols-3 gap-y-8 md:grid-cols-3 md:gap-y-0"
         >
           {COMPANY_STATS.map((stat, i) => (
             <div

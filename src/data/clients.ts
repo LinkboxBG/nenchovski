@@ -84,6 +84,5 @@ export const CORPORATE_CLIENTS: CorporateClient[] = [
 export const COMPANY_STATS = [
   { value: 18, suffix: " години", label: "опит от 2008 г." },
   { value: 300, suffix: "+", label: "преместени фирми и офиси" },
-  { value: 20, suffix: "+", label: "превозни средства на разположение" },
   { value: 40, suffix: "+", label: "души разширен екип" },
 ] as const;
