@@ -19,6 +19,8 @@ import { Gallery } from "@/components/Gallery";
 import { AuthorBox } from "@/components/AuthorBox";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { RelatedServices } from "@/components/RelatedServices";
+import { ServiceNotice } from "@/components/ServiceNotice";
+import { SERVICE_NOTICES } from "@/data/notices";
 import {
   getPageEnrichment,
   getArticleEnrichment,
@@ -194,6 +196,10 @@ function ServiceView({ page }: { page: ServicePage }) {
           />
         }
       />
+
+      {SERVICE_NOTICES[page.slug] ? (
+        <ServiceNotice notice={SERVICE_NOTICES[page.slug]} />
+      ) : null}
 
       {enrichment.authority ? (
         <AuthorityStrip variant={enrichment.authority} />
