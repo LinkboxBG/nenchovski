@@ -5,7 +5,9 @@ import { PRIMARY_CTA } from "@/data/nav";
 import { MegaMenu } from "./nav/MegaMenu";
 import { MobileMenu } from "./nav/MobileMenu";
 
+// „Блог" се качи тук от основния ред (мястото отиде за „Хамалски услуги").
 const UTILITY_LINKS = [
+  { href: "/blog/", label: "Блог" },
   { href: "/za-nas/", label: "За нас" },
   { href: "/kontakti/", label: "Контакти" },
 ];

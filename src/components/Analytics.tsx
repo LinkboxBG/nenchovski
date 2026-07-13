@@ -10,7 +10,7 @@ declare global {
 
 /**
  * GA4 event delegation: елементи с data-ga-event="tel_click|viber_click|..."
- * изпращат събитие при клик. ceni_view се изпраща от /ceni/ страницата.
+ * изпращат събитие при клик. ceni_view се изпраща от /hamalski-uslugi/ (#ceni).
  */
 export function Analytics() {
   useEffect(() => {

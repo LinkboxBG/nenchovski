@@ -50,9 +50,16 @@ type Resolved =
   | { kind: "service"; page: ServicePage }
   | { kind: "article"; article: BlogArticle };
 
+/**
+ * Slug-ове с dedicated route в src/app — MD файлът им остава само като
+ * данни (related-връзки, sitemap), но НЕ се рендерира от catch-all.
+ */
+const DEDICATED_ROUTES = new Set(["hamalski-uslugi"]);
+
 function resolve(path: string[]): Resolved | null {
   const segs = path.map(decodeSeg);
   if (segs.length === 1) {
+    if (DEDICATED_ROUTES.has(segs[0])) return null;
     const page = getServicePage(segs[0]);
     return page ? { kind: "service", page } : null;
   }
@@ -68,6 +75,7 @@ function resolve(path: string[]): Resolved | null {
 export function generateStaticParams() {
   const params: { path: string[] }[] = [];
   for (const p of getServicePages()) {
+    if (DEDICATED_ROUTES.has(p.slug)) continue;
     params.push({ path: p.slug.split("__") });
   }
   for (const a of getBlogArticles()) {

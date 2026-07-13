@@ -24,8 +24,8 @@ ${prices}
 
 ## Основни услуги
 
-- [Хамалски услуги София](${SITE.domain}/hamalski-uslugi/): всички услуги и цени
-- [Цени](${SITE.domain}/ceni/): пълна ценова листа 2026
+- [Хамалски услуги София](${SITE.domain}/hamalski-uslugi/): пилар страница — всички услуги, квартали, междуградски и международни курсове
+- [Цени](${SITE.domain}/hamalski-uslugi/#ceni): пълна ценова листа 2026
 - [Преместване на дома](${SITE.domain}/premestvane-na-doma/)
 - [Преместване на офиси](${SITE.domain}/premestvane-na-ofisi/)
 - [Преместване на мебели](${SITE.domain}/premestvane-na-mebeli/)

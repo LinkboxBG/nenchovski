@@ -11,7 +11,10 @@ export default function NotFound() {
         <Link href="/hamalski-uslugi/" className="text-primary underline">
           хамалски услуги
         </Link>
-        , <Link href="/ceni/" className="text-primary underline">цените</Link>{" "}
+        ,{" "}
+        <Link href="/hamalski-uslugi/#ceni" className="text-primary underline">
+          цените
+        </Link>{" "}
         или{" "}
         <Link href="/blog/" className="text-primary underline">
           блога

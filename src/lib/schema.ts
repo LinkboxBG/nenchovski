@@ -157,13 +157,13 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   };
 }
 
-/** /ceni/ — OfferCatalog от pricing.ts */
+/** Секция „Цени" на пилар страницата /hamalski-uslugi/#ceni — OfferCatalog от pricing.ts */
 export function offerCatalogSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
     name: "Цени на хамалски и транспортни услуги — Хамали Ненчовски",
-    url: `${SITE.domain}/ceni/`,
+    url: `${SITE.domain}/hamalski-uslugi/#ceni`,
     provider: { "@id": ORG_ID },
     itemListElement: PRICES.map((p) => ({
       "@type": "Offer",

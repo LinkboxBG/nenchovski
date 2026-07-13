@@ -5,12 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/data/site";
-import {
-  NAV_GROUPS,
-  FEATURED_ARTICLES,
-  COMPANY_LINKS,
-  type GroupId,
-} from "@/data/nav";
+import { NAV_GROUPS, COMPANY_LINKS, type GroupId } from "@/data/nav";
 
 /**
  * Premium mega menu с hover-intent (без излишен клик):
@@ -22,9 +17,10 @@ import {
  * затова междинните <li> НЕ получават position.
  */
 
-// Само комерсиалните връхни линкове остават тук — „За нас"/„Контакти" минаха
-// в помощната лента (по-малко пренасяне на думи в основния ред).
-const TOP_STATIC_HREFS = ["/ceni/", "/blog/"] as const;
+// Само комерсиалните връхни линкове остават тук — „За нас"/„Контакти"/„Блог"
+// минаха в помощната лента (мястото се освободи за пилар групата „Хамалски
+// услуги" на първа позиция). „Цени" сочи към #ceni секцията на пилара.
+const TOP_STATIC_HREFS = ["/hamalski-uslugi/#ceni"] as const;
 
 const linkCls =
   "flex h-full items-center gap-1.5 whitespace-nowrap px-2 font-sans text-[14px] font-medium text-white/85 hover:text-white transition-colors";
@@ -138,7 +134,7 @@ export function MegaMenu() {
                               {group.label}
                             </Link>
                             <Link
-                              href={group.href}
+                              href="/hamalski-uslugi/"
                               className="hidden xl:inline-flex items-center gap-1 whitespace-nowrap font-sans text-xs font-semibold text-primary hover:text-accent transition-colors"
                             >
                               Всички услуги
@@ -191,68 +187,13 @@ export function MegaMenu() {
           );
         })}
 
-        {staticLinks.map((link) =>
-          link.href === "/blog/" ? (
-            <li
-              key={link.href}
-              className="relative"
-              onMouseEnter={() => open("blog")}
-              onMouseLeave={scheduleClose}
-              onFocus={() => open("blog")}
-              onBlur={onBlurGroup("blog")}
-            >
-              <Link
-                href={link.href}
-                aria-expanded={openId === "blog"}
-                className={`${linkCls} ${openId === "blog" ? "text-white" : ""}`}
-              >
-                {link.label}
-                <ChevronIcon
-                  className={`h-2.5 w-2.5 rotate-90 opacity-50 transition-transform duration-300 ${
-                    openId === "blog" ? "-rotate-90 opacity-90" : ""
-                  }`}
-                />
-              </Link>
-              <div className={`absolute right-0 top-full w-80 ${panelWrap("blog")}`}>
-                <div className="pt-2">
-                  <div className="rounded-2xl border-t-2 border-primary bg-white p-4 shadow-premium">
-                    <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-wide text-secondary/70">
-                      Полезни статии
-                    </p>
-                    <ul className="space-y-0.5">
-                      {FEATURED_ARTICLES.map((article) => (
-                        <li key={article.href}>
-                          <Link
-                            href={article.href}
-                            onClick={() => setOpenId(null)}
-                            className="group/link flex items-start gap-1.5 rounded py-1 text-[13.5px] leading-snug text-ink hover:text-primary transition-colors"
-                          >
-                            <ChevronIcon className="mt-0.5 h-3 w-3 shrink-0 text-primary" />
-                            {article.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href="/blog/"
-                      onClick={() => setOpenId(null)}
-                      className="mt-3 inline-flex items-center gap-1 font-sans text-sm font-semibold text-primary hover:text-accent transition-colors"
-                    >
-                      Всички статии
-                      <ChevronIcon className="h-3.5 w-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-          ) : (
-            <li key={link.href}>
-              <Link href={link.href} className={linkCls}>
-                {link.label}
-              </Link>
-            </li>
-          )
-        )}
+        {staticLinks.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className={linkCls}>
+              {link.label}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );

@@ -3,7 +3,7 @@ import { PRICES, PRICE_DISCLAIMER, formatPrice } from "@/data/pricing";
 
 export const dynamic = "force-static";
 
-/** /pricing.md — машинночетими цени от СЪЩИЯ източник като /ceni/ (pricing.ts). */
+/** /pricing.md — машинночетими цени от СЪЩИЯ източник като #ceni секцията (pricing.ts). */
 export function GET() {
   const rows = PRICES.map(
     (p) =>
@@ -20,7 +20,7 @@ ${rows}
 
 ${PRICE_DISCLAIMER}
 
-Пълна информация: ${SITE.domain}/ceni/
+Пълна информация: ${SITE.domain}/hamalski-uslugi/#ceni
 Телефон за оферта: ${SITE.phoneDisplay} (оферта до 1 час в работно време)
 Фирма: ${SITE.legalName}, ЕИК ${SITE.eik}, София. 18 години опит (от 2008 г.).
 `;

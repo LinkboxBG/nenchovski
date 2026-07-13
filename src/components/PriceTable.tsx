@@ -36,8 +36,11 @@ export function PriceTable() {
         </table>
       </div>
       <p className="mt-3 text-sm text-secondary">
-        {PRICE_DISCLAIMER} Виж всички подробности на страницата{" "}
-        <Link href="/ceni/" className="text-primary underline underline-offset-2">
+        {PRICE_DISCLAIMER} Виж всички подробности в секцията{" "}
+        <Link
+          href="/hamalski-uslugi/#ceni"
+          className="text-primary underline underline-offset-2"
+        >
           Цени
         </Link>
         .

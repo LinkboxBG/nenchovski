@@ -112,7 +112,7 @@ export default function HomePage() {
                 {SITE.phoneDisplay}
               </a>
               <Link
-                href="/ceni/"
+                href="/hamalski-uslugi/#ceni"
                 className="inline-flex items-center gap-1.5 font-sans font-semibold text-white underline underline-offset-4"
               >
                 Виж всички цени →

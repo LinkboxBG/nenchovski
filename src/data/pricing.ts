@@ -3,7 +3,7 @@
  * Официални цени 2026, подадени от Силвия Ненчовска на 10.07.2026.
  * Източник: nenchovski-planning/00-data/ceni-hamalcho-2026.md
  *
- * Тези данни захранват: /ceni/, PriceTable/PriceTeaser на услуговите
+ * Тези данни захранват: /hamalski-uslugi/#ceni, PriceTable/PriceTeaser на услуговите
  * страници, Offer/OfferCatalog schema и /pricing.md. Никога не
  * хардкодвай цена другаде — само оттук.
  */

@@ -2,7 +2,7 @@
 // Източник: data/redirect-map.csv (FINAL-REDIRECT-MAP.csv)
 // Регенерация: node scripts/generate-redirects.mjs
 
-/** 14 × 301 консолидации (next.config redirects) */
+/** 15 × 301 консолидации (next.config redirects) */
 export const REDIRECTS_301: { source: string; destination: string }[] = [
   {
     "source": "/блог/kakvo-se-nosi-v-nova-kashta/",
@@ -59,6 +59,10 @@ export const REDIRECTS_301: { source: string; destination: string }[] = [
   {
     "source": "/category/преместване-на-дома/",
     "destination": "/premestvane-na-doma/"
+  },
+  {
+    "source": "/ceni/",
+    "destination": "/hamalski-uslugi/#ceni"
   }
 ];
 

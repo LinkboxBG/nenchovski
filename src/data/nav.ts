@@ -28,10 +28,12 @@ export interface NavGroup {
 
 export const NAV_GROUPS: NavGroup[] = [
   {
+    // Първа позиция в менюто: пилар страницата „Хамалски услуги"
+    // (изискване на клиента, 13.07.2026) — групата носи нейното име.
     id: "premestvane",
-    label: "Преместване",
+    label: "Хамалски услуги",
     href: "/hamalski-uslugi/",
-    tagline: "Домове, офиси и мебели — от врата до врата",
+    tagline: "Преместване на домове, офиси и мебели — от врата до врата",
     image:
       "/wp-content/uploads/2023/12/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F-%D0%9D%D0%B5%D0%BD%D1%87%D0%BE%D0%B2%D1%81%D0%BA%D0%B8-%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D0%BA%D0%BE%D1%80%D0%B8%D1%86%D0%B0.webp",
     imageAlt: "Екип на Хамали Ненчовски пренася мебели",
@@ -136,7 +138,8 @@ export const FEATURED_ARTICLES: NavItem[] = [
 export const COMPANY_LINKS: NavItem[] = [
   { href: "/za-nas/", label: "За нас" },
   { href: "/preporachai-hamali-nenhcovski/", label: "Клиенти и препоръки" },
-  { href: "/ceni/", label: "Цени" },
+  // /ceni/ е консолидирана в пилар страницата (301 → #ceni секцията)
+  { href: "/hamalski-uslugi/#ceni", label: "Цени" },
   { href: "/blog/", label: "Блог" },
   { href: "/hamali-rabota-sofia/", label: "Работа при нас" },
   { href: "/kontakti/", label: "Контакти" },
