@@ -94,7 +94,12 @@ export function movingCompanySchema() {
     },
     // Organization entity: САМО фирмените канали (GMB + фирмен FB + IG).
     // Личните профили са в Person възлите (founder/author/reviewedBy).
-    sameAs: [SITE.googleMapsUrl, SITE.social.facebook, SITE.social.instagram],
+    sameAs: [
+      SITE.googleMapsUrl,
+      SITE.social.facebook,
+      SITE.social.instagram,
+      SITE.social.tiktok,
+    ],
     inLanguage: "bg",
     // AggregateRating само при ≥5 реални ревюта (правилото „no fake data")
     ...(reviews.aggregate &&

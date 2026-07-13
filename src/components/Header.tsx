@@ -54,6 +54,11 @@ export function Header() {
                 label="Instagram"
               />
               <SocialIcon
+                href={SITE.social.tiktok}
+                src="/brand/social/tiktok.svg"
+                label="TikTok"
+              />
+              <SocialIcon
                 href={`viber://chat?number=%2B${SITE.viber.slice(1)}`}
                 src="/brand/social/viber.svg"
                 label="Viber"
