@@ -51,8 +51,13 @@ const HOME_FAQ = [
   },
 ];
 
+// Херо видеото е декоративен фон зад from-black/90 градиент → q_auto:eco е
+// визуално неразличимо, но реже байтовете драстично: w_960/eco ≈ 472 KB
+// срещу 1.9 MB при оригиналното w_1920,q_auto (−76%). Единствен source —
+// media атрибутът върху <source> в <video> се игнорира от браузърите (работи
+// само в <picture>), затова responsive по viewport не е надежден.
 const HERO_VIDEO = encodeURI(
-  "https://res.cloudinary.com/py4moij3/video/upload/w_1920,q_auto/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.mp4"
+  "https://res.cloudinary.com/py4moij3/video/upload/w_960,q_auto:eco/Евтини_хамали_за_София_Ненчовски_хамали_Хамалчо_ЕООД_yoirlq.mp4"
 );
 // w_1080 (не 1920): постерът е LCP на мобилни — по-лек файл + preload по-долу
 const HERO_POSTER = encodeURI(
