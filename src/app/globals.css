@@ -155,9 +155,12 @@ html.js [data-reveal].reveal-draw.is-inview {
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/*
+ * НЕ слагай scroll-behavior: smooth на html. На тази страница reveal/compositor
+ * активността отменя smooth скроловете → навигацията засича по средата и
+ * котвите (#ceni) не стигат до секцията. Нативният (instant) скрол работи
+ * коректно и уважава scroll-margin-top. Плавността се жертва съзнателно.
+ */
 
 /*
  * Базовите element-стилове ТРЯБВА да са в @layer base — иначе (нелейърнати)
