@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { PRICES, PRICE_DISCLAIMER, formatPrice } from "@/data/pricing";
 
-/** Пълна ценова таблица — данни само от pricing.ts */
-export function PriceTable() {
+/**
+ * Пълна ценова таблица — данни само от pricing.ts.
+ * `highlightId` маркира най-релевантното перо за страницата (само визуално —
+ * фон + inset лента в категорийния цвят; нула нови думи).
+ */
+export function PriceTable({ highlightId }: { highlightId?: string }) {
   return (
     <div>
       <div className="overflow-x-auto rounded-xl border border-black/10">
@@ -17,11 +21,18 @@ export function PriceTable() {
           </thead>
           <tbody>
             {PRICES.map((p) => (
-              <tr key={p.id} className="border-t border-black/5">
+              <tr
+                key={p.id}
+                className={`border-t border-black/5 transition-colors hover:bg-(--cat)/[0.04] ${
+                  p.id === highlightId
+                    ? "bg-(--cat)/[0.06] shadow-[inset_3px_0_0_0_var(--cat)]"
+                    : ""
+                }`}
+              >
                 <td className="px-4 py-3 font-sans font-medium">{p.name}</td>
                 <td className="px-4 py-3">{p.capacity ?? "—"}</td>
                 <td className="px-4 py-3 whitespace-nowrap">
-                  <strong className="text-primary">
+                  <strong className="font-sans text-[17px] font-bold text-primary">
                     {formatPrice(p.sofia.price)} {p.sofia.unit}
                   </strong>
                   {p.sofia.extra ? ` ${p.sofia.extra}` : ""}
@@ -49,12 +60,22 @@ export function PriceTable() {
   );
 }
 
-/** Кратък тийзър „от X €" за секции/карти */
-export function PriceTeaser({ from }: { from: number }) {
+/** Кратък тийзър „от X €" за секции/карти; dark = върху тъмен фон (hero). */
+export function PriceTeaser({
+  from,
+  dark = false,
+}: {
+  from: number;
+  dark?: boolean;
+}) {
   return (
     <span className="inline-flex items-baseline gap-1 font-sans">
-      <span className="text-sm text-secondary">от</span>
-      <span className="text-2xl font-bold text-primary">
+      <span className={`text-sm ${dark ? "text-white/70" : "text-secondary"}`}>
+        от
+      </span>
+      <span
+        className={`text-2xl font-bold ${dark ? "text-white" : "text-primary"}`}
+      >
         {formatPrice(from)} €
       </span>
     </span>

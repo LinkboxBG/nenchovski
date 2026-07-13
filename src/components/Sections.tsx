@@ -46,10 +46,11 @@ export function StepsHowWeWork() {
           data-reveal-stagger
           className="relative mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {/* тънка свързваща линия на голям екран */}
+          {/* свързваща линия — „рисува се" при скрол (reveal-draw, CSS-only) */}
           <span
             aria-hidden
-            className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-line lg:block"
+            data-reveal
+            className="reveal-draw pointer-events-none absolute left-6 right-6 top-6 hidden h-px bg-(--cat-bright)/50 lg:block"
           />
           {STEPS.map((s) => (
             <li
@@ -57,7 +58,7 @@ export function StepsHowWeWork() {
               data-reveal
               className="relative rounded-2xl border border-line bg-carbon-2 p-6"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-red-gradient font-sans text-lg font-bold text-white shadow-premium">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-cat-gradient font-sans text-lg font-bold text-white shadow-premium">
                 {s.n}
               </span>
               <h3 className="mt-4 font-sans text-base font-semibold text-white">
@@ -147,13 +148,13 @@ export function FAQAccordion({
           <details
             key={f.q}
             data-reveal
-            className="group rounded-2xl border border-black/10 bg-white px-5 py-4 shadow-card transition-colors open:border-primary/40 hover:border-primary/50"
+            className="group rounded-2xl border border-black/10 bg-white px-5 py-4 shadow-card transition-colors open:border-(--cat)/40 hover:border-(--cat)/50"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-sans font-medium">
               {f.q}
               <span
                 aria-hidden
-                className="relative h-5 w-5 shrink-0 text-primary"
+                className="relative h-5 w-5 shrink-0 text-(--cat)"
               >
                 <span className="absolute left-1/2 top-1/2 h-0.5 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current" />
                 <span className="absolute left-1/2 top-1/2 h-3 w-0.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current transition-transform duration-300 group-open:rotate-90 group-open:scale-0" />

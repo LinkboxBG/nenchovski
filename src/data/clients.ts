@@ -18,6 +18,10 @@ export interface CorporateClient {
   url?: string;
 }
 
+/** Кредибилити ред — споделен между AuthorityStrip (corporate) и B2B hero. */
+export const CORPORATE_TAGLINE =
+  "Доверен партньор на институции и банки от 2008 г.";
+
 export const CORPORATE_CLIENTS: CorporateClient[] = [
   {
     name: "Българска банка за развитие",

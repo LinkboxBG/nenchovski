@@ -73,6 +73,41 @@
 }
 
 /*
+ * Категорийни сигнатурни акценти (дискретни). ServiceView слага data-cat
+ * на wrapper; компонентите четат --cat през статични arbitrary-value класове
+ * (text-(--cat), border-(--cat)/40 …). Default = бранд червеното → страници
+ * без data-cat (pillar, статии, utility) не мърдат и с пиксел.
+ * --cat-bright е за тъмните carbon секции (контраст ≥3:1 върху #0e0d0d);
+ * цветовете са contrast-коригирани спрямо заданието (teal → cyan-600).
+ */
+:root {
+  --cat: var(--color-primary);
+  --cat-deep: var(--color-accent);
+  --cat-bright: var(--color-red-hot);
+}
+[data-cat="karti"] {
+  --cat: #ea580c;
+  --cat-deep: #c2410c;
+  --cat-bright: #fb923c;
+}
+[data-cat="pochistvane"] {
+  --cat: #0891b2;
+  --cat-deep: #0e7490;
+  --cat-bright: #22d3ee;
+}
+[data-cat="transport"] {
+  --cat: #2563eb;
+  --cat-deep: #1d4ed8;
+  --cat-bright: #60a5fa;
+}
+/* premestvane няма правило → наследява червения default */
+
+/* Категорийният градиент; при defaults е пиксел-идентичен на bg-red-gradient */
+@utility bg-cat-gradient {
+  background-image: linear-gradient(135deg, var(--cat) 0%, var(--cat-deep) 100%);
+}
+
+/*
  * Scroll-reveal система (ScrollFx.tsx):
  * без JS всичко е видимо; html.js крие до интерсекция.
  * Само opacity/transform → нула CLS.
@@ -89,11 +124,31 @@ html.js [data-reveal].is-inview {
   opacity: 1;
   transform: none;
 }
+/*
+ * „Рисуваща се" линия (steps конектора): кара се от СЪЩИЯ ScrollFx observer
+ * ([data-reveal] → .is-inview), но вместо fade-up прави clip-path draw.
+ * НЕ ползвай scaleX(0): нулевата площ прави IntersectionObserver threshold
+ * 0.15 непостижим и линията никога не се „рисува". clip-path не пипа
+ * bounding box-а → IO работи, нула layout/CLS.
+ * Reduced-motion блокът по-долу я прави статично видима; no-JS = видима.
+ */
+html.js [data-reveal].reveal-draw {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s var(--ease-premium) 0.2s;
+}
+html.js [data-reveal].reveal-draw.is-inview {
+  clip-path: inset(0 0 0 0);
+}
 @media (prefers-reduced-motion: reduce) {
   html.js [data-reveal] {
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+  html.js [data-reveal].reveal-draw {
+    clip-path: none !important;
   }
   .animate-marquee {
     animation: none !important;

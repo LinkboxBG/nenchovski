@@ -8,6 +8,12 @@
       "port": 3000
     },
     {
+      "name": "nenchovski-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "start", "-p", "3005"],
+      "port": 3005
+    },
+    {
       "name": "nenchovski-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "3001"],

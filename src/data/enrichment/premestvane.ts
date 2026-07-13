@@ -136,7 +136,10 @@ export const PREMESTVANE_ENRICHMENT: Partial<
         "От 2008 г. — 18 години опит",
       ],
     },
-    authority: "corporate",
+    // B2B hero носи лого стената в самото херо → authority НЕ е "corporate"
+    // (иначе двойна лого стена).
+    heroVariant: "b2b",
+    authority: "reviews",
     gallery: [
       {
         src: "/wp-content/uploads/2026/04/%D0%A5%D0%B0%D0%BC%D0%B0%D0%BB%D0%B8-%D0%A1%D0%BE%D1%84%D0%B8%D1%8F.08.webp",

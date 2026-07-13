@@ -2,6 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { SITE } from "@/data/site";
+import {
+  CORPORATE_CLIENTS,
+  CORPORATE_TAGLINE,
+  COMPANY_STATS,
+} from "@/data/clients";
+import type { CategoryTheme } from "@/data/categoryTheme";
+import { CategoryGlyph } from "@/components/CategoryGlyph";
+import { StarRating } from "@/components/StarRating";
+import { PriceTeaser } from "@/components/PriceTable";
+import { CountUp } from "@/components/CountUp";
 
 interface HeroImage {
   src: string;
@@ -17,6 +27,14 @@ interface HeroProps {
   variant?: "service" | "article";
   formSlot?: ReactNode;
   ctaPhone?: boolean;
+  /** Категориен chip над h1 (дискретната сигнатура; не е heading). */
+  categoryChip?: CategoryTheme;
+  /** GMB блок: рейтинг + брой ревюта + линк към Google профила. */
+  gmb?: { rating: number; count: number; url: string };
+  /** Ценови индикатор „от X €" до GMB блока. */
+  priceFrom?: number;
+  /** B2B вариант: корпоративен кредибилити блок + тих лого marquee. */
+  b2b?: boolean;
 }
 
 /** Full-bleed hero за услугови и статийни страници. */
@@ -29,10 +47,16 @@ export function Hero({
   variant = "service",
   formSlot,
   ctaPhone = true,
+  categoryChip,
+  gmb,
+  priceFrom,
+  b2b = false,
 }: HeroProps) {
   const isArticle = variant === "article";
   const showBadges = !isArticle && !!badges?.length;
   const showCta = !isArticle && ctaPhone !== false;
+  const showMeta = !isArticle && !!(gmb || priceFrom);
+  const b2bStat = COMPANY_STATS[1]; // 300+ преместени фирми и офиси
 
   return (
     <section
@@ -69,6 +93,18 @@ export function Hero({
             <div className="mb-3 font-sans text-sm text-white/70">{breadcrumbsSlot}</div>
           ) : null}
 
+          {categoryChip && !isArticle ? (
+            <div className="mb-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-(--cat-bright)/50 bg-(--cat)/25 px-3 py-1 font-sans text-xs font-semibold uppercase tracking-wide text-white backdrop-blur">
+                <CategoryGlyph
+                  id={categoryChip.id}
+                  className="h-3.5 w-3.5 text-(--cat-bright)"
+                />
+                {categoryChip.chipLabel}
+              </span>
+            </div>
+          ) : null}
+
           <h1
             className={`font-sans font-bold text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.5)] ${
               isArticle ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl"
@@ -96,6 +132,55 @@ export function Hero({
             </ul>
           ) : null}
 
+          {showMeta ? (
+            <div
+              data-reveal
+              className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3"
+            >
+              {gmb ? (
+                <a
+                  href={gmb.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 font-sans text-sm font-medium text-white/85 transition-colors hover:text-white"
+                >
+                  <Image
+                    src="/brand/social/google-g.svg"
+                    alt="Google"
+                    width={20}
+                    height={20}
+                  />
+                  <StarRating dark rating={gmb.rating} />
+                  <span className="underline-offset-2 group-hover:underline">
+                    {String(gmb.rating).replace(".", ",")} · {gmb.count} ревюта
+                    в Google
+                  </span>
+                </a>
+              ) : null}
+              {priceFrom ? <PriceTeaser from={priceFrom} dark /> : null}
+            </div>
+          ) : null}
+
+          {b2b && !isArticle ? (
+            <div data-reveal className="mt-6 max-w-2xl">
+              <p className="font-sans text-sm font-medium text-white/85">
+                {CORPORATE_TAGLINE} Основано и водено от{" "}
+                <strong className="font-semibold text-white">
+                  {SITE.owners.georgi}
+                </strong>
+                .
+              </p>
+              <p className="mt-2 flex items-baseline gap-2 font-sans">
+                <CountUp
+                  value={b2bStat.value}
+                  suffix={b2bStat.suffix}
+                  className="text-3xl font-bold text-white"
+                />
+                <span className="text-sm text-white/70">{b2bStat.label}</span>
+              </p>
+            </div>
+          ) : null}
+
           {showCta ? (
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
@@ -118,7 +203,45 @@ export function Hero({
 
         {formSlot ? <div className="mt-8 lg:mt-0">{formSlot}</div> : null}
       </div>
+
+      {b2b && !isArticle ? <LogoMarquee /> : null}
     </section>
+  );
+}
+
+/**
+ * Тих лого marquee за B2B hero — реалните корпоративни клиенти от clients.ts.
+ * CSS-only: списъкът е дублиран (втората половина aria-hidden), keyframe
+ * marquee = translateX(-50%); prefers-reduced-motion го спира (globals.css).
+ */
+function LogoMarquee() {
+  const doubled = [...CORPORATE_CLIENTS, ...CORPORATE_CLIENTS];
+  return (
+    <div className="relative overflow-hidden border-t border-white/10 bg-black/30 backdrop-blur-sm [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+      <ul className="flex w-max animate-marquee items-center py-3 [animation-duration:70s]">
+        {doubled.map((client, i) => (
+          <li
+            key={`${client.name}-${i}`}
+            aria-hidden={i >= CORPORATE_CLIENTS.length || undefined}
+            className="mr-4 flex h-11 w-32 shrink-0 items-center justify-center rounded-lg bg-white px-3 py-1.5"
+          >
+            {client.logo ? (
+              <Image
+                src={client.logo}
+                alt={i < CORPORATE_CLIENTS.length ? client.name : ""}
+                width={112}
+                height={36}
+                className="max-h-8 w-auto max-w-full object-contain"
+              />
+            ) : (
+              <span className="text-center font-sans text-[11px] font-bold leading-tight tracking-tight text-carbon">
+                {client.shortName ?? client.name}
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
